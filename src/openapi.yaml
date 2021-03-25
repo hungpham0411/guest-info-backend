@@ -5,6 +5,10 @@ info:
   title: ManageItems
   version: 0.1.0
 
+servers:
+  # This is overriden by HOST_BASE_URL.
+  - url: http://localhost:10001/v0
+
 paths:
   /items:
     description: For managing items.
@@ -70,9 +74,7 @@ paths:
 components:
   schemas:
 
-    newGuestVisit:
-      description: 
-      example: 
+    Guest:
       type: object
       properties:
         date:
@@ -93,8 +95,6 @@ components:
           $ref: '#/components/schemas/special'
         SNAP:
           $ref: '#/components/schemas/SNAP'
-        poundsTaken:
-          $ref: '#/components/schemas/poundsTaken'
       required:
         - date
         - studentID
@@ -105,6 +105,18 @@ components:
         - employmentStatus
         - special
         - SNAP
+
+    newGuestVisit:
+      description: 
+      example: 
+      type: object
+      properties:
+        Guest:
+          $ref: '#/components/schemas/Guest'
+        poundsTaken:
+          $ref: '#/components/schemas/poundsTaken'
+      required:
+        - Guest
         - poundsTaken
 
     date:
@@ -172,49 +184,6 @@ components:
       description: how many pounds of food a guest takes
       type: integer
       minimum: 0
-
-    ItemData:
-      description: Item data without an _id.
-      example: {
-        "name": "Canned tuna"
-      }
-      type: object
-      properties:
-        name:
-          $ref: "#/components/schemas/ItemName"
-      required:
-        - name
-
-    ItemArray:
-      type: array
-      nullable: false
-      items:
-        $ref: '#/components/schemas/Item'
-
-    Item:
-      example: {
-        "name": "Canned tuna",
-        "_id": "0123456789aBcDeF01234567"
-      }
-      properties:
-        _id:
-          $ref: "#/components/schemas/MongoId"
-        name:
-          $ref: "#/components/schemas/ItemName"
-      required:
-        - _id
-        - name
-      type: object
-
-    ItemName:
-      description: Name of the item.
-      example: Canned tuna
-      maxLength: 128
-      minLength: 1
-      nullable: false
-      # Must contain at least one non-whitespace character.
-      pattern: \S+
-      type: string
 
     MongoId:
       description: Unique identifier consisting of a 24 digit hexidecimal values (a
