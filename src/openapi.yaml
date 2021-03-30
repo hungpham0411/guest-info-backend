@@ -77,8 +77,6 @@ components:
     Guest:
       type: object
       properties:
-        date:
-          $ref: '#/components/schemas/date'
         studentID:
           $ref: '#/components/schemas/studentID'
         residency:
@@ -96,7 +94,6 @@ components:
         SNAP:
           $ref: '#/components/schemas/SNAP'
       required:
-        - date
         - studentID
         - residency
         - zipCode
@@ -113,10 +110,13 @@ components:
       properties:
         Guest:
           $ref: '#/components/schemas/Guest'
+        date:
+          $ref: '#components/schemas/date'
         poundsTaken:
           $ref: '#/components/schemas/poundsTaken'
       required:
         - Guest
+        - date
         - poundsTaken
 
     date:
