@@ -5,6 +5,10 @@ info:
   title: ManageItems
   version: 0.1.0
 
+servers:
+  # This is overriden by HOST_BASE_URL.
+  - url: http://localhost:10001/v0
+
 paths:
   /items:
     description: For managing items.
@@ -70,48 +74,116 @@ paths:
 components:
   schemas:
 
-    ItemData:
-      description: Item data without an _id.
-      example: {
-        "name": "Canned tuna"
-      }
+    Guest:
       type: object
       properties:
-        name:
-          $ref: "#/components/schemas/ItemName"
+        date:
+          $ref: '#/components/schemas/date'
+        studentID:
+          $ref: '#/components/schemas/studentID'
+        residency:
+          $ref: '#/components/schemas/residency'
+        zipCode:
+          $ref: '#/components/schemas/zipCode'
+        householdSize:
+          $ref: '#/components/schemas/householdSize'
+        ageRange:
+          $ref: '#/components/schemas/ageRange'
+        employmentStatus:
+          $ref: '#/components/schemas/employmentStatus'
+        special:
+          $ref: '#/components/schemas/special'
+        SNAP:
+          $ref: '#/components/schemas/SNAP'
       required:
-        - name
+        - date
+        - studentID
+        - residency
+        - zipCode
+        - householdSize
+        - ageRange
+        - employmentStatus
+        - special
+        - SNAP
 
-    ItemArray:
-      type: array
-      nullable: false
-      items:
-        $ref: '#/components/schemas/Item'
-
-    Item:
-      example: {
-        "name": "Canned tuna",
-        "_id": "0123456789aBcDeF01234567"
-      }
-      properties:
-        _id:
-          $ref: "#/components/schemas/MongoId"
-        name:
-          $ref: "#/components/schemas/ItemName"
-      required:
-        - _id
-        - name
+    newGuestVisit:
+      description: 
+      example: 
       type: object
+      properties:
+        Guest:
+          $ref: '#/components/schemas/Guest'
+        poundsTaken:
+          $ref: '#/components/schemas/poundsTaken'
+      required:
+        - Guest
+        - poundsTaken
 
-    ItemName:
-      description: Name of the item.
-      example: Canned tuna
-      maxLength: 128
-      minLength: 1
+    date:
+      description: date of visit
+      type: string
+      format: date
       nullable: false
-      # Must contain at least one non-whitespace character.
+    
+    studentID:
+      description: Unique student identifier 
+      minLength: 7
+      maxLength: 
+      nullable: false
+      pattern: ^[0-9]+$
+      type: string
+
+    residency:
+      description: whether the lives on campus or not
+      nullable: false
       pattern: \S+
       type: string
+
+    zipCode:
+      description: student zip code (01602 if resident)
+      nullable: false
+      minLength: 5
+      maxLength: 5
+      pattern: ^[0-9]+$
+      type: string
+
+    householdSize:
+      description: size of student's household
+      nullable: false
+      type: integer
+      minimum: 0
+      maximum: 6
+
+    ageRange:
+      description: student age (in a range)
+      nullable: false
+      type: string
+
+    employmentStatus:
+      description: employed or unemployed
+      nullable: false
+      type: string
+
+    special:
+      description: the kind of aid that the student recieves; or none
+      nullable: false
+      type: array
+      items:
+        $ref: '#/components/schemas/specialCases'
+    
+    specialCases:
+      description: each case of aid the student recieves
+      type: string
+
+    SNAP:
+      description: whether or not the student would like assistance applying for SNAP
+      nullable: false
+      type: string
+
+    poundsTaken:
+      description: how many pounds of food a guest takes
+      type: integer
+      minimum: 0
 
     MongoId:
       description: Unique identifier consisting of a 24 digit hexidecimal values (a
