@@ -5,27 +5,24 @@
 
 const logger = require("./logger");
 const Items = require("./items");
-
+const Guests = require("./guest")
 
 class Endpoints {
   /**
-   * POST /items
+   * PUT /update-guest-info/{studentID}
    *
-   * Documented in openapi.yaml#/paths/~1items/post
-   * Note: The ~1 in the previous line is the escape sequence for / in a
-   * JSON pointer.
-   *
-   * See https://expressjs.com/en/4x/api.html for documentation on
-   * the Request and Response objects passed.
+   * Documented in openapi.yaml
    */
-  static async createItem(request, response) {
+  static async updateGuestData(request, response) {
     try {
-      const itemData = request.body;
-      const item = await Items.create(itemData);
-      const resourceUri = `${request.originalUrl}/${item._id}`;
-      response.status(201).location(resourceUri).json(item);
-    } catch (e) {
-      logger.error("Endpoints.createItem", e);
+      const guestData = request.body;
+      const guest = await Guests.update(guestData);
+      const resourceUri = `${request.originalUrl}/${guest._id}`
+
+      response.status(201).location(resourceUri).json(guest);
+    } catch(e) {
+      logger.error("Endpoints.updateGuestData", e);
+
       response.status(500).json({
         status: 500,
         error: "Internal Server Error",
@@ -35,27 +32,14 @@ class Endpoints {
   }
 
   /**
-   * GET /items
+   * GET /get-guest-info/{studentID}
    *
-   * Documented in openapi.yaml#/paths/~1items/get
-   * Note: The ~1 in the previous line is the escape sequence for / in a
-   * JSON pointer.
-   *
-   * See https://expressjs.com/en/4x/api.html for documentation on
-   * the Request and Response objects passed.
+   * Documented in openapi.yaml
    */
- static async listItems(request, response) {
-    try {
-      const items = await Items.getAll();
-      response.status(200).json(items);
-    } catch (e) {
-      logger.error("Endpoints.listItem", e);
-      response.status(500).json({
-        status: 500,
-        error: "Internal Server Error",
-        message: "See server's logs."
-      });
-    }
+  static async getGuestData(request, response) {
+    // TODO Implement
+    // See example:
+    // https://gitlab.com/LibreFoodPantry/training/spikeathons/winter-2021/stoney-manage-items/backend/-/tree/main/src
   }
 }
 
