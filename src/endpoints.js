@@ -4,7 +4,6 @@
  */
 
 const logger = require("./logger");
-const Items = require("./items");
 const Guests = require("./guest")
 
 class Endpoints {
