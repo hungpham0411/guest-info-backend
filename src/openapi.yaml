@@ -44,6 +44,7 @@ paths:
 
     put:
       x-eov-operation-handler: endpoints
+      operationId: updateGuestData
       requestBody:
         content:
           application/json:
