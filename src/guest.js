@@ -3,6 +3,7 @@
  * Mongo database. In architecture parlance, it is a Data Access Object.
  * It abstracts away the details of interact with the database.
  */
+const { ObjectID } = require("mongodb");
 const Database = require("./database");
 const logger = require("./logger");
 
@@ -27,6 +28,24 @@ class Guests {
           error: "Internal Server Error",
           caused_by: e
       };
+    }
+  }
+
+  static async getOne(id) {
+    try{
+      const guestsCollection = await getGuestsCollection();
+      let guest = await guestsCollection.findOne({ studentID: ObjectID(id) });
+      if (guest !== null) {
+        guest.studentID = guest.studentID.toHexString();
+      }
+      return guest;
+    } catch (e) {
+      logger.error("GuestsAccessObject.getAll", e);
+      throw {
+        code: 500,
+        error: "Internal Server Error",
+        caused_by: e
+      }
     }
   }
 

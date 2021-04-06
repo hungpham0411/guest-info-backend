@@ -36,9 +36,26 @@ class Endpoints {
    * Documented in openapi.yaml
    */
   static async getGuestData(request, response) {
-    // TODO Implement
-    // See example:
-    // https://gitlab.com/LibreFoodPantry/training/spikeathons/winter-2021/stoney-manage-items/backend/-/tree/main/src
+    try {
+      const id = request.params.studentID;
+      const guest = await Guests.getOne(id);
+      if (guest !== null) {
+        response.status(200).json(guest);
+      } else {
+        response.status(404).json({
+          status: 404,
+          error: "Guest not found",
+          message: "StudentID does not exist"
+        })
+      }
+    } catch (e) {
+      logger.error("Endpoints.getGuestData", e);
+      response.status(500).json({
+        status: 500,
+        error: "Internal Server Error",
+        message: "See server's logs."
+      })
+    }
   }
 }
 
