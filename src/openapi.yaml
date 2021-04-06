@@ -31,6 +31,13 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Guest'
+        "400":
+          $ref: '#/components/responses/BadRequest'
+        "404":
+          $ref: '#/components/responses/NotFound'
+        "500":
+          $ref: '#/components/responses/ServerError'
+
 
   /update-guest-info/{studentID}:
     description: For updating info about the guest with given id.
@@ -69,14 +76,30 @@ paths:
                   type: string
                 style: simple
         "400":
-          description: Bad requests.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/EovError'
-
+          $ref: '#/components/responses/BadRequest'
+        "500":
+          $ref: '#/components/responses/ServerError'
 
 components:
+  responses:
+    NotFound:
+      description: The specified resource was not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/EovError'
+    BadRequest:
+      description: The request was malformed
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/EovError'
+    ServerError:
+      description: There was an error in the server
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/EovError'
   schemas:
 
     Guest:
@@ -107,28 +130,6 @@ components:
         - employmentStatus
         - special
         - SNAP
-
-    newGuestVisit:
-      description:
-      example:
-      type: object
-      properties:
-        Guest:
-          $ref: '#/components/schemas/Guest'
-        date:
-          $ref: '#components/schemas/date'
-        poundsTaken:
-          $ref: '#/components/schemas/poundsTaken'
-      required:
-        - Guest
-        - date
-        - poundsTaken
-
-    date:
-      description: date of visit
-      type: string
-      format: date
-      nullable: false
 
     studentID:
       description: Unique student identifier
@@ -184,11 +185,6 @@ components:
       description: whether or not the student would like assistance applying for SNAP
       nullable: false
       type: string
-
-    poundsTaken:
-      description: how many pounds of food a guest takes
-      type: integer
-      minimum: 0
 
     MongoId:
       description: Unique identifier consisting of a 24 digit hexidecimal values (a
