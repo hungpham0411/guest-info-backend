@@ -8,29 +8,6 @@ const Database = require("./database");
 const logger = require("./logger");
 
 class Guests {
-  static async getAll() {
-    try {
-      const guestsCollections = await getGuestsCollection();
-      const guests_cursor = guestsCollections.find();
-
-      let guests = await guests_cursor.toArray();
-
-      guests.forEach((guest) => {
-          guest._id = guest._id.toHexString();
-      });
-
-      return guests;
-    } catch(e) {
-      logger.error("GuestsAccessObject.getAll", e);
-
-      throw new {
-          code: 500,
-          error: "Internal Server Error",
-          caused_by: e
-      };
-    }
-  }
-
   static async getOne(id) {
     try{
       const guestsCollection = await getGuestsCollection();
