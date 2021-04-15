@@ -97,29 +97,26 @@ components:
       properties:
         studentID:
           $ref: '#/components/schemas/studentID'
-        residency:
-          $ref: '#/components/schemas/residency'
+        resident:
+          $ref: '#/components/schemas/resident'
         zipCode:
           $ref: '#/components/schemas/zipCode'
         householdSize:
           $ref: '#/components/schemas/householdSize'
-        ageRange:
-          $ref: '#/components/schemas/ageRange'
-        employmentStatus:
-          $ref: '#/components/schemas/employmentStatus'
-        special:
-          $ref: '#/components/schemas/special'
-        SNAP:
-          $ref: '#/components/schemas/SNAP'
+        age:
+          $ref: '#/components/schemas/age'
+        employed:
+          $ref: '#/components/schemas/employed'
+        assistance:
+          $ref: '#/components/schemas/assistance'
       required:
         - studentID
-        - residency
+        - resident
         - zipCode
         - householdSize
-        - ageRange
-        - employmentStatus
-        - special
-        - SNAP
+        - age
+        - employed
+        - assistance
 
     studentID:
       description: Unique student identifier
@@ -129,11 +126,10 @@ components:
       pattern: ^[0-9]+$
       type: string
 
-    residency:
+    resident:
       description: whether the lives on campus or not
       nullable: false
-      pattern: \S+
-      type: string
+      type: boolean
 
     zipCode:
       description: student zip code (01602 if resident)
@@ -150,31 +146,50 @@ components:
       minimum: 0
       maximum: 6
 
-    ageRange:
+    age:
       description: student age (in a range)
       nullable: false
-      type: string
+      type: integer
+      minimum: 1
+      maximum: 100
 
-    employmentStatus:
+    employed:
       description: employed or unemployed
       nullable: false
-      type: string
+      type: boolean
 
-    special:
+    assistance:
       description: the kind of aid that the student recieves; or none
       nullable: false
-      type: array
-      items:
-        $ref: '#/components/schemas/specialCases'
-
-    specialCases:
-      description: each case of aid the student recieves
-      type: string
-
-    SNAP:
-      description: whether or not the student would like assistance applying for SNAP
-      nullable: false
-      type: string
+      type: object
+      properties:
+        socSec:
+          nullable: false
+          type: boolean
+        TANF:
+          nullable: false
+          type: boolean
+        SNAP:
+          nullable: false
+          type: boolean
+        WIC:
+          nullable: false
+          type: boolean
+        SFSP:
+          nullable: false
+          type: boolean
+        Breakfast:
+          nullable: false
+          type: boolean
+        Lunch:
+          nullable: false
+          type: boolean
+        finAid:
+          nullable: false
+          type: boolean
+        other:
+          nullable: false
+          type: boolean
 
     EovError:
       description: Not Acceptable
