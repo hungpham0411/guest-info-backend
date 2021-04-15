@@ -123,14 +123,12 @@ components:
 
     studentID:
       description: Unique student identifier
-      minLength: 7
-      maxLength:
       nullable: false
-      pattern: ^[0-9]+$
+      pattern: ^\d{7}$
       type: string
 
     residency:
-      description: whether the lives on campus or not
+      description: whether the student lives on campus or not
       nullable: false
       pattern: \S+
       type: string
@@ -138,9 +136,7 @@ components:
     zipCode:
       description: student zip code (01602 if resident)
       nullable: false
-      minLength: 5
-      maxLength: 5
-      pattern: ^[0-9]+$
+      pattern: ^\d{5}(?:[-\s]\d{4})?$
       type: string
 
     householdSize:
