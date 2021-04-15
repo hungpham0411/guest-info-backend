@@ -124,11 +124,7 @@ components:
       pattern: ^\d{7}$
       type: string
 
-<<<<<<< HEAD
     resident:
-=======
-    residency:
->>>>>>> 2bfb426227f528279a9a5fb7d7e7d352fb3e63c3
       description: whether the student lives on campus or not
       nullable: false
       type: boolean
