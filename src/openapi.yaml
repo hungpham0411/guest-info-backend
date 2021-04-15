@@ -10,8 +10,8 @@ servers:
   - url: http://localhost:10001/v0
 
 paths:
-  /get-guest-info/{studentID}:
-    description: For getting info about the guest with given id.
+  /guest-info/{studentID}:
+    description: For info about the guest with given id.
     parameters:
       - in: path
         name: studentID
@@ -38,18 +38,8 @@ paths:
         "500":
           $ref: '#/components/responses/ServerError'
 
-
-  /update-guest-info/{studentID}:
-    description: For updating info about the guest with given id.
-    parameters:
-    - in: path
-      name: studentID
-      schmea:
-        $ref: '#/components/schemas/studentID'
-      required: true
-      description: Student ID of the guest whose info is desired.
-
     put:
+      description: Modifies guest's data.
       x-eov-operation-handler: endpoints
       operationId: updateGuestData
       requestBody:
