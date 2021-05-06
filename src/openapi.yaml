@@ -33,8 +33,6 @@ paths:
                 $ref: '#/components/schemas/Guest'
         "400":
           $ref: '#/components/responses/BadRequest'
-        "404":
-          $ref: '#/components/responses/NotFound'
         "500":
           $ref: '#/components/responses/ServerError'
 
@@ -72,12 +70,6 @@ paths:
 
 components:
   responses:
-    NotFound:
-      description: The specified resource was not found
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/EovError'
     BadRequest:
       description: The request was malformed
       content:
