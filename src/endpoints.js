@@ -39,15 +39,7 @@ class Endpoints {
     try {
       const id = request.params.studentID;
       const guest = await Guests.getOne(id);
-      if (guest !== null) {
-        response.status(200).json(guest);
-      } else {
-        response.status(404).json({
-          status: 404,
-          error: "Guest not found",
-          message: "StudentID does not exist"
-        })
-      }
+      response.status(200).json(guest !== null ? guest : {});
     } catch (e) {
       logger.error("Endpoints.getGuestData", e);
       response.status(500).json({

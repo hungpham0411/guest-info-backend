@@ -33,8 +33,6 @@ paths:
                 $ref: '#/components/schemas/Guest'
         "400":
           $ref: '#/components/responses/BadRequest'
-        "404":
-          $ref: '#/components/responses/NotFound'
         "500":
           $ref: '#/components/responses/ServerError'
 
@@ -72,12 +70,6 @@ paths:
 
 components:
   responses:
-    NotFound:
-      description: The specified resource was not found
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/EovError'
     BadRequest:
       description: The request was malformed
       content:
@@ -101,21 +93,18 @@ components:
           $ref: '#/components/schemas/resident'
         zipCode:
           $ref: '#/components/schemas/zipCode'
-        householdSize:
-          $ref: '#/components/schemas/householdSize'
-        age:
-          $ref: '#/components/schemas/age'
-        employed:
-          $ref: '#/components/schemas/employed'
+        unemployment:
+          $ref: '#/components/schemas/unemployment'
         assistance:
           $ref: '#/components/schemas/assistance'
+        household:
+          $ref: '#/components/schemas/household'
       required:
         - studentID
         - resident
         - zipCode
-        - householdSize
-        - age
-        - employed
+        - household
+        - unemployment
         - assistance
 
     studentID:
@@ -135,22 +124,14 @@ components:
       pattern: ^\d{5}(?:[-\s]\d{4})?$
       type: string
 
-    householdSize:
-      description: size of student's household
-      nullable: false
-      type: integer
-      minimum: 0
-      maximum: 6
+    household:
+      description: an array of ages of a student's household members
+      type: array
+      items:
+        type: string
 
-    age:
-      description: student age (in a range)
-      nullable: false
-      type: integer
-      minimum: 1
-      maximum: 100
-
-    employed:
-      description: employed or unemployed
+    unemployment:
+      description: if the student recieve unemployment benefits
       nullable: false
       type: boolean
 
@@ -165,25 +146,25 @@ components:
         TANF:
           nullable: false
           type: boolean
+        finAid:
+          nullable: false
+          type: boolean
+        other:
+          nullable: false
+          type: boolean
         SNAP:
           nullable: false
           type: boolean
         WIC:
           nullable: false
           type: boolean
+        breakfast:
+          nullable: false
+          type: boolean
+        lunch:
+          nullable: false
+          type: boolean
         SFSP:
-          nullable: false
-          type: boolean
-        Breakfast:
-          nullable: false
-          type: boolean
-        Lunch:
-          nullable: false
-          type: boolean
-        finAid:
-          nullable: false
-          type: boolean
-        other:
           nullable: false
           type: boolean
 
