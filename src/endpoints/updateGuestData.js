@@ -4,7 +4,7 @@
  */
 
  const logger = require("../lib/logger");
- const Guests = require("../Data/guest")
+ const Guests = require("../data/guest")
 
  module.exports = {
 
