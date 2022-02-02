@@ -14,8 +14,8 @@ const bodyParser = require('body-parser');
 const swaggerUI = require('swagger-ui-express');
 
 // Load our libraries.
-const config = require('./config');
-const logger = require('./logger');
+const config = require('./lib/config');
+const logger = require('./lib/logger');
 
 // Create express app.
 const app = express();
@@ -66,4 +66,5 @@ app.use((err, req, res, next) => {
 });
 
 // Start serving.
-http.createServer(app).listen(3000);
+http.createServer(app).listen(3000)
+

@@ -4,3 +4,9 @@ node_modules
 # Ignore all environment files.
 # They may have secrets and are system specific.
 .env*
+
+# Docker data directory
+data
+
+# MacOS metadata
+.DS_Store

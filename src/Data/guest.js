@@ -4,8 +4,8 @@
  * It abstracts away the details of interact with the database.
  */
 const { ObjectID } = require("mongodb");
-const Database = require("./database");
-const logger = require("./logger");
+const Database = require("../lib/database");
+const logger = require("../lib/logger");
 
 class Guests {
   static async getOne(id) {
