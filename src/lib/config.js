@@ -8,6 +8,9 @@
  *    const rootDirectory = config.ROOT_DIR;
  */
 
+const path = require('path');
+const ROOT_DIR = path.join(__dirname, "..", "..");
+
 /**
  * @typedef {Object} Config
  * @property {string} ROOT_DIR
@@ -15,10 +18,8 @@
  * @property {string} SERVER_PORT
  * @property {any} MONGO_URI
  * @property {any} OPENAPI_SCHEMA
+ * @property {string} ENDPOINTS_DIR
  */
-
-// Load path, a builtin library for manipulating file paths.
-const path = require('path');
 
 // Define config, a simple object that contains configuration values
 // that will be use throughout the application.
@@ -27,13 +28,15 @@ const config = {
 
   // The root directory of this project. Note that this will be some path
   // inside the Docker container.
-  ROOT_DIR: path.join(__dirname, "..", ".."),
+  ROOT_DIR,
 
   // The port to access this app from the host.
   HOST_BASE_URL: process.env.HOST_BASE_URL || "http://localhost:3000/",
 
   // The port the server listens on.
   SERVER_PORT: process.env.SERVER_PORT || "3000",
+
+  ENDPOINTS_DIR: path.join(ROOT_DIR, "src", "endpoints"),
 
   // MongoDB connection string
   MONGO_URI: undefined,
@@ -42,9 +45,7 @@ const config = {
   OPENAPI_SCHEMA: undefined
 };
 
-console.log(config.ROOT_DIR);
 
-// Load openapi.yaml into OPENAPI_SCHEMA.
 /** 
  * @param {string} filePath 
  * @returns {any}

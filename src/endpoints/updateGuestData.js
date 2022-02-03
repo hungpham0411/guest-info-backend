@@ -1,20 +1,14 @@
-/**
- * endpoints.js is responsible for responding to requests for each endpoint
- * in the REST API.
- */
-
 const logger = require("../lib/logger");
 const Guests = require("../data/guest")
 
-module.exports = {
-  /**
-    * PUT /update-guest-info/{studentID}
-    *
-    * Documented in openapi.yaml
-    * @param {import("express").Request} request
-    * @param {import("express").Response} response
-    */
-  async updateGuestData(request, response) {
+/** 
+ * endpoints.js is responsible for responding to requests for each endpoint in the REST API.
+ * @type {import("../lib/mount-endpoints").EndpointObject} 
+ */
+const updateGuestData = {
+  method: 'put',
+  path: '/guest-info/:id',
+  async handler(request, response) {
     try {
       const guestData = request.body;
       const guest = await Guests.update(guestData);
@@ -31,4 +25,6 @@ module.exports = {
       });
     }
   }
-};
+}
+
+module.exports = updateGuestData;

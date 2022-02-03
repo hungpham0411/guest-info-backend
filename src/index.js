@@ -16,56 +16,44 @@ const swaggerUI = require('swagger-ui-express');
 // Load our libraries.
 const config = require('./lib/config');
 const logger = require('./lib/logger');
+const mountEndpoints = require('./lib/mount-endpoints.js');
 
-// Create express app.
-const app = express();
+async function main() {
+  let app = await buildApp();
+  let server = http.createServer(app)
+  server.listen(config.SERVER_PORT);
+}
 
-// Enable CORS Requests for ALL requests.
-app.use(cors());
+async function buildApp() {
+  const app = express();
+  app.use(cors());
+  app.use(express.json());
+  app.use(express.urlencoded({ extended: false }));
+  app.use(
+    OpenApiValidator.middleware({
+      apiSpec: config.OPENAPI_SCHEMA,
+      validateRequests: true,
+      validateResponses: false,
+    }),
+  );
 
-// Set up body parsers for the request body types you expect.
-// Must be specified prior to endpoints.
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: false }));
+  mountEndpoints(app);
 
-// Install the OpenApiValidator onto your express app.
-// See https://github.com/cdimascio/express-openapi-validator#%EF%B8%8F-operationhandlers-optional
-// for configuration.
-app.use(
-  OpenApiValidator.middleware({
-
-    // The spec that will be used to validate against and to route requests.
-    apiSpec: config.OPENAPI_SCHEMA,
-
-    // Validate requests.
-    validateRequests: true,
-
-    // Validate responses.
-    // If we validate responses, and a response is invalid, then the client
-    // receives an error message that obscures the orignal (although invalid)
-    // response. This makes debugging the response more difficult. Instead,
-    // validate responses in tests ran as a client.
-    validateResponses: false,
-
-    // Use x-eov-* and operationId in openapi.yaml to define routes.
-    // They are relative to this dierectory.
-    operationHandlers: path.join(__dirname),
-  }),
-);
-
-// Create an Express error handler
-//@ts-ignore
-app.use((err, req, res, next) => {
-  // Dump errors to server logs (console).
-  logger.error(__filename, err);
-
-  // Send error response to client.
-  res.status(err.status || 500).json({
-    message: err.message,
-    errors: err.errors,
+  //@ts-ignore
+  app.use((err, req, res, next) => {
+    if (res.headersSent) {
+      return next(err);
+    }
+    logger.error(__filename, err);
+    res.status(err.status || 500).json({
+      message: err.message,
+      errors: err.errors,
+    });
   });
-});
 
-// Start serving.
-http.createServer(app).listen(3000)
+  return app;
+}
 
+main()
+  .then(() => logger.info(`Sever running on http://localhost:${config.SERVER_PORT}`))
+  .catch(e => logger.error(e))
