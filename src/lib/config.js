@@ -8,11 +8,21 @@
  *    const rootDirectory = config.ROOT_DIR;
  */
 
+/**
+ * @typedef {Object} Config
+ * @property {string} ROOT_DIR
+ * @property {string} HOST_BASE_URL
+ * @property {string} SERVER_PORT
+ * @property {any} MONGO_URI
+ * @property {any} OPENAPI_SCHEMA
+ */
+
 // Load path, a builtin library for manipulating file paths.
 const path = require('path');
 
 // Define config, a simple object that contains configuration values
 // that will be use throughout the application.
+/** @type {Config} config */
 const config = {
 
   // The root directory of this project. Note that this will be some path
@@ -24,15 +34,26 @@ const config = {
 
   // The port the server listens on.
   SERVER_PORT: process.env.SERVER_PORT || "3000",
+
+  // MongoDB connection string
+  MONGO_URI: undefined,
+
+  // OpenAPI schema object
+  OPENAPI_SCHEMA: undefined
 };
 
 console.log(config.ROOT_DIR);
 
 // Load openapi.yaml into OPENAPI_SCHEMA.
+/** 
+ * @param {string} filePath 
+ * @returns {any}
+ */
 function loadOpenApi(filePath) {
   const jsYaml = require("js-yaml");
   const fs = require("fs");
   const openapiYaml = fs.readFileSync(filePath);
+  // @ts-ignore
   const openapi = jsYaml.load(openapiYaml);
   return openapi;
 }

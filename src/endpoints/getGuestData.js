@@ -11,8 +11,10 @@
    * GET /get-guest-info/{studentID}
    *
    * Documented in openapi.yaml
+   * @param {import("express").Request} request
+   * @param {import("express").Response} response
    */
-  static async getGuestData(request, response) {
+   async getGuestData(request, response) {
     try {
       const id = request.params.studentID;
       const guest = await Guests.getOne(id);

@@ -54,6 +54,7 @@ app.use(
 );
 
 // Create an Express error handler
+//@ts-ignore
 app.use((err, req, res, next) => {
   // Dump errors to server logs (console).
   logger.error(__filename, err);

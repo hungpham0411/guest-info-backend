@@ -3,24 +3,25 @@
  * in the REST API.
  */
 
- const logger = require("../lib/logger");
- const Guests = require("../data/guest")
+const logger = require("../lib/logger");
+const Guests = require("../data/guest")
 
- module.exports = {
-
- /**
-   * PUT /update-guest-info/{studentID}
-   *
-   * Documented in openapi.yaml
-   */
-    static async updateGuestData(request, response) {
+module.exports = {
+  /**
+    * PUT /update-guest-info/{studentID}
+    *
+    * Documented in openapi.yaml
+    * @param {import("express").Request} request
+    * @param {import("express").Response} response
+    */
+  async updateGuestData(request, response) {
     try {
       const guestData = request.body;
       const guest = await Guests.update(guestData);
       const resourceUri = `${request.originalUrl}/${guest._id}`
 
       response.status(201).location(resourceUri).json(guest);
-    } catch(e) {
+    } catch (e) {
       logger.error("Endpoints.updateGuestData", e);
 
       response.status(500).json({
@@ -29,5 +30,5 @@
         message: "See server's logs."
       });
     }
-}
+  }
 };
