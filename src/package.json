@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "node index.js"
+    "start": "node index.js",
+    "dev": " node index.js"
   },
   "keywords": [
     "openapi"
@@ -17,7 +18,7 @@
     "express": "^4.16.4",
     "express-openapi-validator": "^4.10.5",
     "js-yaml": "^4.0.0",
-    "mongodb": "^3.6.2",
+    "mongodb": "^4.3.1",
     "swagger-ui-express": "^4.0.2",
     "winston": "^3.2.1"
   },

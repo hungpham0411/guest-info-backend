@@ -2,7 +2,9 @@ version: "3.3"
 services:
 
   backend-server:
-    image: registry.gitlab.com/librefoodpantry/client-solutions/theas-pantry/guestinfosystem/guestinfobackend:jsdoc
+    # image: registry.gitlab.com/librefoodpantry/client-solutions/theas-pantry/guestinfosystem/guestinfobackend:jsdoc
+    image: backend-server
+    build: .
     ports:
       - 3000:3000
     environment:

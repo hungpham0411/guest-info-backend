@@ -45,13 +45,28 @@ docker stop backend-database
 
 Download and inspect/configure `docker-compose.yaml`.
 
-Start.
+Start Docker Compose
 
 ```bash
-docker-compose up --detach
+docker-compose -f docker-compose.build.yaml up
 ```
 
-Stop.
+- Rebuild image if needed `docker-compose -f docker-compose.build.yaml build --no-cache`
+
+Prepare local enviorment
+
+```bash
+cd src
+yarn 
+```
+
+Start local enviorment
+```bash
+yarn start
+```
+
+
+Stopping local development
 
 ```bash
 docker-compose down

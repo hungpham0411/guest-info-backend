@@ -1,5 +1,5 @@
 const logger = require("../lib/logger");
-const Guests = require("../data/guest")
+const Guests = require("../Data/guest")
 
 /** 
  * endpoints.js is responsible for responding to requests for each endpoint in the REST API.
