@@ -21,18 +21,18 @@ build:
     - docker tag backend-server $CONTAINER_TEST_IMAGE
     - docker push $CONTAINER_TEST_IMAGE
 
-test:
-  stage: test
-  before_script:
-    - apk add docker-compose
-    - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
-  script:
-    - docker pull $CONTAINER_TEST_IMAGE
-    - docker tag $CONTAINER_TEST_IMAGE backend-server
-    - ci/build-test
-    - ci/up
-    - ci/test
-    - ci/down
+# test:
+#   stage: test
+#   before_script:
+#     - apk add docker-compose
+#     - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
+#   script:
+#     - docker pull $CONTAINER_TEST_IMAGE
+#     - docker tag $CONTAINER_TEST_IMAGE backend-server
+#     - ci/build-test
+#     - ci/up
+#     - ci/test
+#     - ci/down
 
 release:
   stage: release
