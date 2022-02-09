@@ -10,8 +10,6 @@ const path = require('path');
 const express = require('express');
 const cors = require('cors');
 const OpenApiValidator = require('express-openapi-validator');
-const bodyParser = require('body-parser');
-const swaggerUI = require('swagger-ui-express');
 
 // Load our libraries.
 const config = require('./lib/config');

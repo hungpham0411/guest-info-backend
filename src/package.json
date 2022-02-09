@@ -13,7 +13,6 @@
   "license": "GPL-3.0",
   "private": true,
   "dependencies": {
-    "body-parser": "^1.19.0",
     "cors": "^2.8.5",
     "express": "^4.16.4",
     "express-openapi-validator": "^4.10.5",

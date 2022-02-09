@@ -32,6 +32,25 @@
   */
  
  class Guests {
+  /**
+   * 
+   */ 
+  static async getAll(){
+    try {
+      const guestsCollection = await getGuestsCollection();
+      const guest_cursor = await guestsCollection.find();
+      let guests = await guest_cursor.toArray();
+      return guests;
+    } catch (e) {
+      logger.error("GuestsAccessObject.getAll", e);
+      throw {
+        code: 500,
+        error: "Internal Server Error",
+        caused_by: e
+      }
+    }
+   }
+
    /**
     * @param {string} id
     * @returns {Promise<Guest>}

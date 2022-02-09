@@ -31,10 +31,10 @@ const config = {
   ROOT_DIR,
 
   // The port to access this app from the host.
-  HOST_BASE_URL: process.env.HOST_BASE_URL || "http://localhost:3000/",
+  HOST_BASE_URL: process.env.HOST_BASE_URL || "http://localhost:10001/",
 
   // The port the server listens on.
-  SERVER_PORT: process.env.SERVER_PORT || "3000",
+  SERVER_PORT: process.env.SERVER_PORT || "10001",
 
   ENDPOINTS_DIR: path.join(ROOT_DIR, "src", "endpoints"),
 
