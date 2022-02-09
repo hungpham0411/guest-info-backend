@@ -15,6 +15,7 @@ const OpenApiValidator = require('express-openapi-validator');
 const config = require('./lib/config');
 const logger = require('./lib/logger');
 const mountEndpoints = require('./lib/mount-endpoints.js');
+const { Type } = require('js-yaml');
 
 async function main() {
   let app = await buildApp();
@@ -39,6 +40,7 @@ async function buildApp() {
 
   //@ts-ignore
   app.use((err, req, res, next) => {
+    console.log("WE ARE HERE");
     if (res.headersSent) {
       return next(err);
     }
