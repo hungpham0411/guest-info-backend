@@ -15,7 +15,7 @@ const ROOT_DIR = path.join(__dirname, "..", "..");
  * @typedef {Object} Config
  * @property {string} ROOT_DIR
  * @property {string} HOST_BASE_URL
- * @property {string} SERVER_PORT
+ * @property {number} SERVER_PORT
  * @property {any} MONGO_URI
  * @property {any} OPENAPI_SCHEMA
  * @property {string} ENDPOINTS_DIR
@@ -28,13 +28,14 @@ const config = {
 
   // The root directory of this project. Note that this will be some path
   // inside the Docker container.
-  ROOT_DIR,
+  ROOT_DIR: ROOT_DIR,
 
   // The port to access this app from the host.
   HOST_BASE_URL: process.env.HOST_BASE_URL || "http://localhost:10001/",
 
   // The port the server listens on.
-  SERVER_PORT: process.env.SERVER_PORT || "10001",
+  // @ts-ignore
+  SERVER_PORT: process.env.SERVER_PORT || 10001,
 
   ENDPOINTS_DIR: path.join(ROOT_DIR, "src", "endpoints"),
 
