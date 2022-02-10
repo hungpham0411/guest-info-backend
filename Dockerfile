@@ -13,15 +13,16 @@ RUN yarn install
 
 ###
 FROM node:14-alpine
-WORKDIR /app
+WORKDIR /usr/src/app
 # Best practice: Don't run as root. Instead run as node (created in node image)
 RUN chown -R node:node .
 USER node
 COPY --from=build --chown=node:node /src/node_modules ./src/node_modules
 COPY --chown=node:node . .
+RUN chmod +x /usr/src/app/entrypoint.sh
 
 ENV NODE_ENV=production
-ENTRYPOINT [ "/app/entrypoint.sh" ]
+ENTRYPOINT [ "/usr/src/app/entrypoint.sh" ]
 # # # # ExpressJS listens on 3000 by default. Expose it.
 # EXPOSE 3000
 
