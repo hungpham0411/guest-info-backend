@@ -1,9 +1,9 @@
 openapi: 3.0.3
 info:
   title: GuestInfoSystemAPI
-  version: 0.2.0
+  version: 0.3.0
 paths:
-  /guests:
+  /guest/list:
     description: List all guests
     get:
       description: Gets all guests data.
@@ -16,7 +16,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/GuestArray'
-  '/guest-info/{studentID}':
+  '/guest/{studentID}':
     description: For info about the guest with given id.
     parameters:
       - name: studentID

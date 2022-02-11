@@ -8,7 +8,7 @@ const mongo = require("mongodb");
  * */
 const getAllGuests = {
   method: 'get',
-  path: '/guests',
+  path: '/guest/list',
   async handler(request, response) {
     try {
       const guests = await Guests.getAll();

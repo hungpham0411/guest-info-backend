@@ -7,13 +7,13 @@ const Guests = require("../Data/guest")
  */
 const updateGuestData = {
   method: 'put',
-  path: '/guest-info/:id',
+  path: '/guest/:id',
   async handler(request, response) {
     try {
+      const id = request.params.id;
       const guestData = request.body;
-      const guest = await Guests.update(guestData);
+      const guest = await Guests.update(id, guestData);
       const resourceUri = `${request.originalUrl}/${guest._id}`
-
       response.status(201).location(resourceUri).json(guest);
     } catch (e) {
       logger.error("Endpoints.updateGuestData", e);

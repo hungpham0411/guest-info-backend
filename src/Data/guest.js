@@ -58,10 +58,7 @@
    static async getOne(id) {
      try {
        const guestsCollection = await getGuestsCollection();
-       let guest = await guestsCollection.findOne({ studentID: new ObjectId(id) });
-       if (guest !== null) {
-         guest.studentID = guest.studentID.toHexString();
-       }
+       let guest = await guestsCollection.findOne({ studentID: id});
        return guest;
      } catch (e) {
        logger.error("GuestsAccessObject.getAll", e);
@@ -74,16 +71,33 @@
    }
  
    /**
+    * @param {string} id
     * @param {any} guestData
     * @returns {Promise<any>}
     */
-   static async update(guestData) {
+   static async update(id, guestData) {
      try {
        const guestsCollections = await getGuestsCollection();
-       //TODO: return guest object and update return type
+       const guest = guestsCollections.updateOne(
+         //query
+         { studentID: id},
+         //request body
+         {
+           $set:
+           {
+            resident: guestData.resident,
+            zipCode: guestData.zipCode,
+            unemployment: guestData.unemployment,
+            assistance: guestData.assistance,
+            household: guestData.household
+           }
+         },
+         //if query match with existed data, update, otherwise, insert new data
+         { upsert: true}
+       )
+       return guest;
      } catch (e) {
        logger.error("GuestsAccessObject.update", e);
- 
        throw {
          code: 500,
          error: "Internal Server Error",

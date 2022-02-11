@@ -8,11 +8,10 @@ const mongo = require("mongodb");
  * */
 const getGuestData = {
   method: 'get',
-  path: '/guest-info/:id',
+  path: '/guest/:id',
   async handler(request, response) {
     try {
       const id = request.params.id;
-      //TODO: convert id to Mongodb hex id
       const guest = await Guests.getOne(id);
       response.status(200).json(guest !== null ? guest : {});
     } catch (e) {
