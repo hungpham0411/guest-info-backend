@@ -6,16 +6,15 @@ const mongo = require("mongodb");
  * endpoints.js is responsible for responding to requests for each endpoint in the REST API.
  * @type {import("../lib/mount-endpoints").EndpointObject} 
  * */
-const getGuestData = {
+const getAllGuests = {
   method: 'get',
-  path: '/guest/:id',
+  path: '/guest/list',
   async handler(request, response) {
     try {
-      const id = request.params.id;
-      const guest = await Guests.getOne(id);
-      response.status(200).json(guest !== null ? guest : {});
+      const guests = await Guests.getAll();
+      response.status(200).json(guests);
     } catch (e) {
-      logger.error("Endpoints.getGuestData", e);
+      logger.error("Endpoints.getAllGuests", e);
       response.status(500).json({
         status: 500,
         error: "Internal Server Error",
@@ -25,4 +24,4 @@ const getGuestData = {
   }
 };
 
-module.exports = getGuestData
+module.exports = getAllGuests

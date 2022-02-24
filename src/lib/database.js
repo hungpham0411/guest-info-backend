@@ -1,3 +1,4 @@
+// @ts-nocheck
 /*
 
   database.js provides a connected MongoClient that should be reused across

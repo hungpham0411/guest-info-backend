@@ -1,11 +1,22 @@
 openapi: 3.0.3
 info:
   title: GuestInfoSystemAPI
-  version: 0.1.0
-servers:
-  - url: 'http://localhost:10001/v0'
+  version: 0.3.0
 paths:
-  '/guest-info/{studentID}':
+  /guest/list:
+    description: List all guests
+    get:
+      description: Gets all guests data.
+      operationId: getAllGuests
+      x-eov-operation-handler: endpoints
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GuestArray'
+  '/guest/{studentID}':
     description: For info about the guest with given id.
     parameters:
       - name: studentID
@@ -129,7 +140,6 @@ components:
           - '1'
           - '4'
           - '10'
-      type: object
       description: Guest object
       properties:
         studentID:
@@ -146,11 +156,12 @@ components:
           $ref: '#/components/schemas/Household'
       required:
         - studentID
-        - resident
-        - zipCode
-        - household
-        - unemployment
-        - assistance
+      type: object
+    GuestArray:
+      type: array
+      nullable: false
+      items:
+        $ref: '#/components/schemas/Guest'
     StudentID:
       example: 1211141
       description: Unique student identifier
