@@ -14,7 +14,7 @@ const chaiAsPromised = require('chai-as-promised');
 const apiContractValidator = require("api-contract-validator");
 const apiContractValidatorChaiPlugin = apiContractValidator.chaiPlugin({
   // The path to the OpenAPI specification. (Created in entrypoint.sh)
-  apiDefinitionsPath: "./openapi.yaml",
+  apiDefinitionsPath: "../lib/openapi.yaml",
   // Produce coverage reports.
   reportCoverage: true,
 });
