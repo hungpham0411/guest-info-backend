@@ -1,0 +1,236 @@
+openapi: 3.0.3
+info:
+  title: GuestInfoSystemAPI
+  version: 0.3.0
+paths:
+  /guest/list:
+    description: List all guests
+    get:
+      description: Gets all guests data.
+      operationId: getAllGuests
+      x-eov-operation-handler: endpoints
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GuestArray'
+  '/guest/{studentID}':
+    description: For info about the guest with given id.
+    parameters:
+      - name: studentID
+        in: path
+        required: true
+        description: Student ID of the guest whose info is desired.
+        schema:
+          $ref: '#/components/schemas/StudentID'
+    get:
+      description: Gets guest's data.
+      operationId: getGuestData
+      x-eov-operation-handler: endpoints
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Guest'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '500':
+          $ref: '#/components/responses/ServerError'
+    put:
+      description: Modifies guest's data.
+      operationId: updateGuestData
+      x-eov-operation-handler: endpoints
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Guest'
+          headers:
+            Location:
+              description: URI of new item.
+              explode: false
+              required: true
+              schema:
+                minLength: 1
+                nullable: false
+                type: string
+              style: simple
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '500':
+          $ref: '#/components/responses/ServerError'
+components:
+  responses:
+    BadRequest:
+      description: The request was malformed
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/EovError'
+    NotFound:
+      description: The specified resource was not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/EovError'
+    ServerError:
+      description: There was an error in the server.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/EovError'
+  schemas:
+    EovError:
+      description: Not Acceptable
+      type: object
+      example:
+        message: '.response should have required property ''name'', .response should have required property ''id'''
+        errors:
+          - path: .response.name
+            message: should have required property 'name'
+            errorCode: required.openapi.validation
+          - path: .response.id
+            message: should have required property 'id'
+            errorCode: required.openapi.validation
+      properties:
+        message:
+          type: string
+        errors:
+          type: array
+          items:
+            type: object
+            properties:
+              path:
+                type: string
+              message:
+                type: string
+              errorCode:
+                type: string
+    MongoId:
+      description: Unique identifier consisting of a 24 digit hexidecimal values (a MongoDB stingified ObjectID)
+      example: 0123456789aBcDeF01234567
+      maxLength: 24
+      minLength: 24
+      nullable: false
+      pattern: '^[a-zA-Z0-9]+$'
+      type: string
+    Guest:
+      example:
+        studentID: '1234567'
+        resident: true
+        zipCode: 02048
+        unemployment: false
+        assistance:
+          socSec: false
+          TANF: false
+          finAid: false
+          other: false
+          SNAP: false
+          WIC: false
+          breakfast: false
+          lunch: false
+          SFSP: false
+        household:
+          - '1'
+          - '4'
+          - '10'
+      description: Guest object
+      properties:
+        studentID:
+          $ref: '#/components/schemas/StudentID'
+        resident:
+          $ref: '#/components/schemas/Resident'
+        zipCode:
+          $ref: '#/components/schemas/ZipCode'
+        unemployment:
+          $ref: '#/components/schemas/Unemployment'
+        assistance:
+          $ref: '#/components/schemas/Assistance'
+        household:
+          $ref: '#/components/schemas/Household'
+      required:
+        - studentID
+      type: object
+    GuestArray:
+      type: array
+      nullable: false
+      items:
+        $ref: '#/components/schemas/Guest'
+    StudentID:
+      example: 1211141
+      description: Unique student identifier
+      nullable: false
+      pattern: '^\d{7}$'
+      type: string
+    Resident:
+      example: true
+      description: whether the student lives on campus or not
+      nullable: false
+      type: boolean
+    ZipCode:
+      example: 2048
+      description: student zip code (01602 if resident)
+      nullable: false
+      pattern: '^\d{5}(?:[-\s]\d{4})?$'
+      type: string
+    Unemployment:
+      example: false
+      description: if the student recieve unemployment benefits
+      nullable: false
+      type: boolean
+    Assistance:
+      example:
+        socSec: false
+        TANF: false
+        finAid: false
+        other: false
+        SNAP: false
+        WIC: false
+        breakfast: false
+        lunch: false
+        SFSP: false
+      description: the kind of aid that the student recieves; or none
+      nullable: false
+      type: object
+      properties:
+        socSec:
+          nullable: false
+          type: boolean
+        TANF:
+          nullable: false
+          type: boolean
+        finAid:
+          nullable: false
+          type: boolean
+        other:
+          nullable: false
+          type: boolean
+        SNAP:
+          nullable: false
+          type: boolean
+        WIC:
+          nullable: false
+          type: boolean
+        breakfast:
+          nullable: false
+          type: boolean
+        lunch:
+          nullable: false
+          type: boolean
+        SFSP:
+          nullable: false
+          type: boolean
+    Household:
+      example:
+        - '2'
+        - '4'
+      description: an array of ages of a student's household members
+      type: array
+      items:
+        type: string
