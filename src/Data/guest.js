@@ -94,7 +94,7 @@
          //if query match with existed data, update, otherwise, insert new data
          { upsert: true}
        )
-       return guest;
+       return guestData;
      } catch (e) {
        logger.error("GuestsAccessObject.update", e);
        throw {

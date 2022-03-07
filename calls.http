@@ -24,7 +24,8 @@ content-type: application/json
     "SFSP": false
   },
   "household": [
-    "1"
+    "1",
+    "4"
   ]
 }
 
