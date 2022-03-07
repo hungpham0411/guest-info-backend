@@ -1,6 +1,6 @@
-const chai = require('./chai.js');
+const chai = require('./lib/chai.js');
 const expect = chai.expect;
-const { updateGuest } = require('./api.js');
+const { updateGuest } = require('./lib/api.js');
 
 describe("update (PUT /guest/:studentID)", function () {
     context("ID exist", function() {
