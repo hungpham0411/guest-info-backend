@@ -14,7 +14,7 @@ const updateGuestData = {
       const guestData = request.body;
       const guest = await Guests.update(id, guestData);
       const resourceUri = `${request.originalUrl}/${guest._id}`
-      response.status(201).location(resourceUri).json(guest);
+      response.status(200).location(resourceUri).json(guest);
     } catch (e) {
       logger.error("Endpoints.updateGuestData", e);
 
