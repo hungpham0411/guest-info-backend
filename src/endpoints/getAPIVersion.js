@@ -1,5 +1,4 @@
 const logger = require("../lib/logger");
-const Guests = require("../Data/guest");
 const { API_VERSION } = require("../lib/config");
 
 /** 

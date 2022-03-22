@@ -9,10 +9,12 @@ services:
     environment:
       BASE_URL: http://localhost:10001/
       MONGO_URI: mongodb://backend-database
+      RABBITMQ_URL: amqp://guest:guest@rabbitmq:5672/?connection_attempts=5&retry_delay=5
     networks:
       - backend-network
     depends_on:
       - backend-database
+      - rabbitmq
 
   backend-database:
     image: mongo:4

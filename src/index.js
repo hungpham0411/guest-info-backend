@@ -4,7 +4,6 @@
 
 // Load builtin libraries.
 const http = require('http');
-const path = require('path');
 
 // Load 3rd-party libraries.
 const express = require('express');
@@ -15,7 +14,8 @@ const OpenApiValidator = require('express-openapi-validator');
 const config = require('./lib/config');
 const logger = require('./lib/logger');
 const mountEndpoints = require('./lib/mount-endpoints.js');
-const { Type } = require('js-yaml');
+const MessageBroker = require('./lib/rabbitmq');
+const Database = require('./lib/database');
 
 async function main() {
   let app = await buildApp();
@@ -40,7 +40,6 @@ async function buildApp() {
 
   //@ts-ignore
   app.use((err, req, res, next) => {
-    console.log("WE ARE HERE");
     if (res.headersSent) {
       return next(err);
     }
@@ -54,6 +53,25 @@ async function buildApp() {
   return app;
 }
 
+const getServerStatus = () => {
+  // wait to check status becasue rabbitmq
+  // takes several seconds to load
+  setTimeout(async () => {
+    let mongoConnected = false, rabbitConnected = false;
+    await Database.get()
+      .then(() => mongoConnected = true)
+      .catch((err) => logger.info(err))
+    await MessageBroker.getChannel()
+      .then(() => rabbitConnected = true)
+      .catch(err => logger.info(err))
+    logger.info({
+      "Server Running On": config.HOST_BASE_URL,
+      "DB Connected": mongoConnected,
+      "Rabbit Connected": rabbitConnected
+    })
+  }, 7000)
+}
+
 main()
-  .then(() => logger.info(`Sever running on http://localhost:${config.SERVER_PORT}`))
-  .catch(e => logger.error(e))
+  .then(getServerStatus)
+  .catch(e => logger.info(e))
