@@ -6,7 +6,7 @@
   "scripts": {
     "start": "node index.js",
     "dev-docker": "cd .. && docker compose -f docker-compose.dev.yaml up",
-    "dev-server": "HOST_BASE_URL=http://localhost:3000 SERVER_PORT=3000 nodemon index.js"
+    "dev-server": "nodemon index.js"
   },
   "keywords": [
     "openapi"
