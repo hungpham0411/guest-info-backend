@@ -37,7 +37,6 @@ commitlint-default:
 variables:
   CONTAINER_TEST_IMAGE: $CI_REGISTRY_IMAGE:$CI_COMMIT_REF_SLUG
   CONTAINER_RELEASE_IMAGE: $CI_REGISTRY_IMAGE:latest
-  RABBITMQ_IMAGE: rabbitmq
 
 rabbitmq:
   stage: rabbitmq
@@ -46,8 +45,7 @@ rabbitmq:
     - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
   script:
     - docker-compose -f docker-compose.dev.yaml build --pull rabbitmq
-    - docker tag rabbitmq $RABBITMQ_IMAGE
-    - docker push $RABBITMQ_IMAGE
+    - docker push rabbitmq
 
 build:
   stage: build
