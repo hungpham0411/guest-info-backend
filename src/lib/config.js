@@ -35,11 +35,11 @@ const config = {
   ROOT_DIR: ROOT_DIR,
 
   // The port to access this app from the host.
-  HOST_BASE_URL: process.env.HOST_BASE_URL ? process.env.HOST_BASE_URL : "http://localhost:10001",
+  HOST_BASE_URL: process.env.HOST_BASE_URL ? process.env.HOST_BASE_URL : "http://localhost:10350",
 
   // The port the server listens on.
   // @ts-ignore
-  SERVER_PORT: process.env.SERVER_PORT || 10001,
+  SERVER_PORT: process.env.SERVER_PORT || 10350,
 
   ENDPOINTS_DIR: path.join(ROOT_DIR, "src", "endpoints"),
 

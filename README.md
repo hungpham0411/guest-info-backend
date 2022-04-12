@@ -26,13 +26,13 @@ Run the backend-server.
 docker run \
   --name backend-server \
   --detach \
-  -p 10001:3000 \
-  -e HOST_BASE_URL=http://localhost:10001/v0 \
+  -p 10350:3000 \
+  -e HOST_BASE_URL=http://localhost:10350/v0 \
   -e MONGO_URI=mongodb://backend-database \
   registry.gitlab.com/librefoodpantry/training/spikeathons/winter-2021/stoney-manage-items/backend:latest
 ```
 
-The service is available at http://localhost:10001/v0/items outside Docker, and at http://backend-server:3000 inside Docker.
+The service is available at http://localhost:10350/v0/items outside Docker, and at http://backend-server:3000 inside Docker.
 
 Stop.
 
@@ -107,7 +107,7 @@ Start.
 docker-compose -f docker-compose.yaml -f docker-compose.persist.yaml up --detach
 ```
 
-The service is available at http://localhost:10001/v0/items outside Docker, and at http://backend-server:3000 inside Docker. Its data is stored in ./backend-database.
+The service is available at http://localhost:10350/v0/items outside Docker, and at http://backend-server:3000 inside Docker. Its data is stored in ./backend-database.
 
 
 Stop.

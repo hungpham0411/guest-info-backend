@@ -1,11 +1,11 @@
-GET http://localhost:10001/guest/list
+GET http://localhost:10350/guest/list
 
 ###
-GET http://localhost:10001/guest/1234567
+GET http://localhost:10350/guest/1234567
 
 ###
 //Trigger this PUT the first time will create new student with ID: 1234567, the second time it will update the student data
-PUT http://localhost:10001/guest/1234567 HTTP/1.1
+PUT http://localhost:10350/guest/1234567 HTTP/1.1
 content-type: application/json
 
 {
@@ -30,7 +30,7 @@ content-type: application/json
 }
 
 ###
-PUT http://localhost:10001/guest/1234568 HTTP/1.1
+PUT http://localhost:10350/guest/1234568 HTTP/1.1
 content-type: application/json
 
 {
