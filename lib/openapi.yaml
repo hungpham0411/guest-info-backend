@@ -48,7 +48,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/Guest'
+              $ref: '#/components/schemas/GuestBody'
       responses:
         '200':
           description: OK
