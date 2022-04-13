@@ -16,5 +16,5 @@ fi
 if [ -n "${1}" ] ; then
     "${@}"
 else
-    node src/index.js
+    yarn dev-server
 fi
