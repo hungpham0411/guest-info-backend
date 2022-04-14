@@ -4,16 +4,13 @@ const amqplib = require('amqplib/callback_api');
 const config = require('./config');
 const logger = require('./logger');
 
-class MessageBroker {
-  // /** @type {import('amqplib/callback_api').Connection} */
-  // static connection;
-
+class rabbitMQBroker {
   /** @type {import('amqplib/callback_api').Channel} */
   static channel;
 
   /** @returns {Promise<import('amqplib/callback_api').Channel>} */
   static async getChannel() {
-    if (MessageBroker.channel === undefined) {
+    if (rabbitMQBroker.channel === undefined) {
       /** @type {import('amqplib/callback_api').Channel} */
       const result = await new Promise(function (resolve, reject) {
         amqplib.connect(config.RABBITMQ_URL, function (connectionError, connection) {
@@ -47,6 +44,22 @@ class MessageBroker {
     _channel.assertQueue(queue);
     logger.info("Queue sent")
     _channel.sendToQueue(queue, Buffer.from(JSON.stringify(data)))
+  }
+}
+
+class MessageBroker {
+  /** @returns {Promise<import('amqplib/callback_api').Channel>} */
+  static async getChannel() {
+    return rabbitMQBroker.getChannel()
+  }
+
+  /**
+   * Send message to queue
+   * @param {String} queue Queue name
+   * @param {Object} data Message as Buffer
+   */
+  static async sendMessage(queue, data) {
+    rabbitMQBroker.sendMessage(queue, data)
   }
 }
 

@@ -14,7 +14,7 @@ const OpenApiValidator = require('express-openapi-validator');
 const config = require('./lib/config');
 const logger = require('./lib/logger');
 const mountEndpoints = require('./lib/mount-endpoints.js');
-const MessageBroker = require('./lib/rabbitmq');
+const MessageBroker = require('./lib/messageBroker');
 const Database = require('./lib/database');
 
 async function main() {
