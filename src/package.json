@@ -5,7 +5,6 @@
   "main": "index.js",
   "scripts": {
     "start": "node index.js",
-    "dev-docker": "cd .. && docker compose -f docker-compose.dev.yaml up",
     "dev-server": "nodemon index.js"
   },
   "keywords": [

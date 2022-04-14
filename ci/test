@@ -1,1 +1,0 @@
-docker-compose -f docker-compose.yaml -f docker-compose.build.yaml -f docker-compose.test.yaml run --rm test-runner

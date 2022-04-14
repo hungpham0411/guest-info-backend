@@ -1,7 +1,0 @@
-{
-  "name": "guest-info-main",
-  "version": "0.1.0",
-  "scripts": {
-    "dev-server": "cd src && yarn dev-server"
-  }
-}

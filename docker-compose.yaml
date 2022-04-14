@@ -1,25 +1,27 @@
 version: "3.3"
 services:
 
-  backend-server:
-    # image: registry.gitlab.com/librefoodpantry/client-solutions/theas-pantry/guestinfosystem/guestinfobackend:jsdoc
-    image: backend-server
+  backend:
     build: .
+    image: backend
     ports:
-      - 3000:3000
+      - 10001:10001
     environment:
-      HOST_BASE_URL: http://localhost:3000
+      BASE_URL: http://localhost:10001/
       MONGO_URI: mongodb://backend-database
-    networks:
-      - backend-network
+      RABBITMQ_URL: amqp://rabbitmq
     depends_on:
       - backend-database
+      - rabbitmq
+    networks:
+      - backend-network
 
   backend-database:
     image: mongo:4
     networks:
       - backend-network
 
+# https://docs.docker.com/compose/compose-file/
   rabbitmq:
     image: 'rabbitmq:3.6-management-alpine'
     ports:
@@ -36,10 +38,8 @@ services:
       RABBITMQ_DEFAULT_USER: "guest"
       RABBITMQ_DEFAULT_PASS: "guest"
     networks:
-      - backend-network
-
+      -  backend-network
 
 networks:
   backend-network:
 
-  

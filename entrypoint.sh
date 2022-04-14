@@ -16,5 +16,5 @@ fi
 if [ -n "${1}" ] ; then
     "${@}"
 else
-    yarn dev-server
+    cd src && yarn dev-server
 fi

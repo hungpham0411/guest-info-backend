@@ -22,7 +22,9 @@ COPY --chown=node:node . .
 RUN chmod +x /usr/src/app/entrypoint.sh
 
 ENV NODE_ENV=production
-ENTRYPOINT [ "/usr/src/app/entrypoint.sh" ]
+WORKDIR /usr/src/app/src
+CMD [ "yarn", "dev-server" ]
+# ENTRYPOINT [ "/usr/src/app/entrypoint.sh" ]
 # # # # ExpressJS listens on 3000 by default. Expose it.
 # EXPOSE 3000
 
