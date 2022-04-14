@@ -42,7 +42,7 @@ build:
     - apk add docker-compose
     - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
   script:
-    - docker-compose -f docker-compose.dev.yaml build --pull backend
+    - docker-compose build --pull backend
     - docker tag backend $CONTAINER_TEST_IMAGE
     - docker push $CONTAINER_TEST_IMAGE
 
