@@ -1,6 +1,6 @@
 const logger = require("../lib/logger");
 const Guests = require("../Data/guest");
-const MessageBroker = require("../lib/rabbitmq");
+const MessageBroker = require("../lib/messageBroker");
 
 /** 
  * endpoints.js is responsible for responding to requests for each endpoint in the REST API.
