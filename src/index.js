@@ -69,7 +69,7 @@ const getServerStatus = () => {
       "DB Connected": mongoConnected,
       "Rabbit Connected": rabbitConnected
     })
-  }, 7000)
+  }, 10000)
 }
 
 main()
