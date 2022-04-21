@@ -10,6 +10,7 @@ services:
       BASE_URL: http://localhost:10350/
       MONGO_URI: mongodb://backend-database
       RABBITMQ_URL: amqp://rabbitmq
+      TIME_OUT: 20000
     depends_on:
       - backend-database
       - rabbitmq

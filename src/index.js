@@ -69,7 +69,8 @@ const getServerStatus = () => {
       "DB Connected": mongoConnected,
       "Rabbit Connected": rabbitConnected
     })
-  }, 20000)
+  // @ts-ignore
+  }, config.TIME_OUT)
 }
 
 main()

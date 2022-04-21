@@ -50,7 +50,10 @@ const config = {
   RABBITMQ_URL: process.env.RABBITMQ_URL ? process.env.RABBITMQ_URL : 'amqp://guest:guest@localhost:5672/?connection_attempts=5&retry_delay=5',
 
   // OpenAPI schema object
-  OPENAPI_SCHEMA: path.join(ROOT_DIR, 'lib', 'openapi.yaml')
+  OPENAPI_SCHEMA: path.join(ROOT_DIR, 'lib', 'openapi.yaml'),
+  
+  //RabbitMQ timeout
+  TIME_OUT: process.env.TIME_OUT || 7000
 };
 
 /**
