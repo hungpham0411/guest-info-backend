@@ -24,7 +24,7 @@ const updateGuestData = {
       MessageBroker.sendMessage('guest-info', guest);
       
       // http status
-      const resourceUri = `${request.originalUrl}/${guest.studentID}`
+      const resourceUri = `${request.originalUrl}/${id}`
       response.status(201).location(resourceUri).json(guest);
     } catch (e) {
       logger.error("Endpoints.updateGuestData", e);

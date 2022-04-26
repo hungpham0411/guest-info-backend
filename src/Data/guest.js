@@ -27,7 +27,8 @@
   * @property {string} zipCode
   * @property {boolean} unemployment
   * @property {Assistance[]} assistance
-  * @property {string[]} household
+  * @property {number} studentAge
+  * @property {number} numberInHousehold
   */
  
  class Guests {
@@ -72,12 +73,12 @@
    /**
     * @param {string} id
     * @param {any} guestData
-    * @returns {Promise<any>}
+    * @returns {Promise<Guest>}
     */
    static async update(id, guestData) {
      try {
        const guestsCollections = await getGuestsCollection();
-       const guest = guestsCollections.updateOne(
+       const guest = await guestsCollections.updateOne(
          //query
          { studentID: id},
          //request body
@@ -88,7 +89,8 @@
             zipCode: guestData.zipCode,
             unemployment: guestData.unemployment,
             assistance: guestData.assistance,
-            household: guestData.household
+            studentAge: guestData.studentAge,
+            numberInHousehold: guestData.numberInHousehold
            }
          },
          //if query match with existed data, update, otherwise, insert new data
