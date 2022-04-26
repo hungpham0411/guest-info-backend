@@ -9,6 +9,7 @@ PUT http://localhost:10350/guest/1234567 HTTP/1.1
 content-type: application/json
 
 {
+  "studentID": "1234567",
   "resident": true,
   "zipCode": "01610",
   "unemployment": false,
@@ -23,10 +24,8 @@ content-type: application/json
     "lunch": false,
     "SFSP": false
   },
-  "household": [
-    "1",
-    "4"
-  ]
+  "studentAge": 42, 
+  "numberInHousehold": 4
 }
 
 ###
@@ -34,6 +33,7 @@ PUT http://localhost:10350/guest/1234568 HTTP/1.1
 content-type: application/json
 
 {
+  "studentID": "1234568",
   "resident": true,
   "zipCode": "01603",
   "unemployment": false,
@@ -48,8 +48,6 @@ content-type: application/json
     "lunch": false,
     "SFSP": false
   },
-  "household": [
-    "1",
-    "4"
-  ]
+  "studentAge": 42, 
+  "numberInHousehold": 4
 }

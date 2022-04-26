@@ -1,7 +1,7 @@
 openapi: 3.0.3
 info:
   title: GuestInfoSystemAPI
-  version: 0.3.1
+  version: 0.4.0
 paths:
   /guest/list:
     description: List all guests
@@ -154,10 +154,8 @@ components:
           breakfast: false
           lunch: false
           SFSP: false
-        household:
-          - '1'
-          - '4'
-          - '10'
+        studentAge: 42
+        numberInHousehold: 4
       description: Guest object
       properties:
         studentID:
@@ -170,11 +168,23 @@ components:
           $ref: '#/components/schemas/Unemployment'
         assistance:
           $ref: '#/components/schemas/Assistance'
-        household:
-          $ref: '#/components/schemas/Household'
+        studentAge:
+          $ref: '#/components/schemas/StudentAge'
+        numberInHousehold:
+          $ref: '#/components/schemas/NumberInHousehold'
       required:
         - studentID
       type: object
+    StudentAge:
+      example: 43
+      description: Age of student in years
+      nullable: false
+      type: number
+    NumberInHousehold:
+      example: 4
+      description: Number of people living in the household
+      nullable: false
+      type: number
     GuestBody:
       example:
         resident: true
@@ -194,6 +204,8 @@ components:
           - '1'
           - '4'
           - '10'
+        studentAge: 42
+        numberInHousehold: 4
       description: Put Guest body object
       properties:
         resident:
@@ -204,10 +216,12 @@ components:
           $ref: '#/components/schemas/Unemployment'
         assistance:
           $ref: '#/components/schemas/Assistance'
-        household:
-          $ref: '#/components/schemas/Household'
-      # required:
-      #   - studentID
+        studentAge:
+          $ref: '#/components/schemas/StudentAge'
+        numberInHousehold:
+          $ref: '#/components/schemas/NumberInHousehold'
+      required:
+        - studentID
       type: object
     GuestArray:
       type: array
@@ -229,7 +243,7 @@ components:
       example: 2048
       description: student zip code (01602 if resident)
       nullable: false
-      pattern: ^\b\d{5}\b(?:[- ]{1}\d{4})?$
+      pattern: '^\b\d{5}\b(?:[- ]{1}\d{4})?$'
       type: string
     Unemployment:
       example: false
@@ -278,14 +292,6 @@ components:
         SFSP:
           nullable: false
           type: boolean
-    Household:
-      example:
-        - '2'
-        - '4'
-      description: an array of ages of a student's household members
-      type: array
-      items:
-        type: string
     APIVersion:
       example: 1.2.3
       description: Current opperating version of the API
