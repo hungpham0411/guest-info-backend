@@ -7,185 +7,73 @@
 Provides a backend REST API server for managing items in a larger inventory system.
 
 src/openapi.yaml contains the specification for the Manage Items API.
-
-## 1. Use via Docker
-
+## 1. Normal Use
+Go to `src` and run
 ```bash
-mkdir -p data
+yarn
+```
+to install dependencies
+
+To run the server
+```bash
+npm run dev-server
+```
+but, remember to give `environment` variables before run, `environment` variables are in `src/lib/config.js` where each environment variable is assigned with `process.env.<something>`
+
+<strong>Please notice this repository for some reason will not run with `node` but run with `nodemon`, we were not able to find out the reason during our time, you can try it if you want!!!<strong>
+
+## 2. Use via Docker Compose (Recommended, no need to reconfig ENV every run)
+
+## Development
+Run docker-compose.dev.yaml to start a binded `nodemon` repository
+```bash
+docker-compose -f docker-compose.dev.yaml up 
+```
+Try changing your file and see the message from terminal, it will differ from production execution
+
+- Rebuild image if needed
+```bash
+docker-compose build 
 ```
 
-
-Run a MongoDB as the backend-database.
-
-```bash
-docker run --name backend-database --detach -v "$PWD/data:/data/db" mongo:4
-```
-
-Run the backend-server.
-
-```bash
-docker run \
-  --name backend-server \
-  --detach \
-  -p 10001:3000 \
-  -e HOST_BASE_URL=http://localhost:10001/v0 \
-  -e MONGO_URI=mongodb://backend-database \
-  registry.gitlab.com/librefoodpantry/training/spikeathons/winter-2021/stoney-manage-items/backend:latest
-```
-
-The service is available at http://localhost:10001/v0/items outside Docker, and at http://backend-server:3000 inside Docker.
-
-Stop.
-
-```bash
-docker stop backend-server
-docker stop backend-database
-```
-
-## 2. Use via Docker Compose
-
-Download and inspect/configure `docker-compose.yaml`.
-
-Start Docker Compose
-
-```bash
-docker-compose -f docker-compose.build.yaml up
-```
-
-- Rebuild image if needed `docker-compose -f docker-compose.build.yaml build --no-cache`
-
-Prepare local enviorment
-
-```bash
-cd src
-yarn 
-```
-
-Start local enviorment
-```bash
-yarn start
-```
-
-
-Stopping local development
-
+- Terminate the container
 ```bash
 docker-compose down
 ```
 
-## Use during development
-  ```bash
-  cd src
-  yarn
-  ```
+## Production
+Download and inspect/configure `docker-compose.yaml`.
 
-  In one terminal tab, run
-  ```bash
-  npm run dev-docker
-  ```
-  
-  In a second tab, run
-  ```bash
-  npm run dev-server
-  ```
-
-  The server will run on localhost:3000 and you will be able to see server output in the other console.
-  Visit http://localhost:15672 to view the RabbitMQ gui. 
-
-## 3. Use via Docker Compose with Persistence
-
-Download and inspect/configure `docker-compose.yaml` and `docker-compose.persist.yaml`.
-
-Create the directory listed as the source in `docker-compose.persist.yaml` .
-
+Start Docker Compose
 ```bash
-mkdir -p backend-database
+docker-compose up
 ```
 
-Start.
-
+- Rebuild image if needed
 ```bash
-docker-compose -f docker-compose.yaml -f docker-compose.persist.yaml up --detach
+docker-compose build
 ```
 
-The service is available at http://localhost:10001/v0/items outside Docker, and at http://backend-server:3000 inside Docker. Its data is stored in ./backend-database.
-
-
-Stop.
-
+- Terminate the container
 ```bash
-docker-compose -f docker-compose.yaml -f docker-compose.persist.yaml down
+docker-compose down
 ```
 
-Start it again with the same command line options as before and its state will pick up where it left off.
+The server will run on `localhost:10350` and you will be able to see server output in the other console.
+Visit http://localhost:15672 to view the RabbitMQ gui. 
 
-
-## 4. Environment Variables
-
-* HOST_BASE_URL - The URL used to access the service from outside the Docker environment.
-* MONGO_URI - The MongoDB connection string.
-
-## 5. Development
-
-Build the backend-server.
-
-```bash
-# ci/build
-docker-compose -f docker-compose.yaml -f docker-compose.build.yaml build --pull backend-server
-```
-
-Build the test-runner.
-
-```bash
-# ci/build-test
-docker-compose -f docker-compose.yaml -f docker-compose.build.yaml -f docker-compose.test.yaml build --pull test-runner
-```
-
-Run the backend-server and its database.
-
-```bash
-# ci/up
-docker-compose -f docker-compose.yaml -f docker-compose.build.yaml -f docker-compose.test.yaml up --detach backend-server
-```
-
-Test the running backend-server.
-
-```bash
-# ci/test
-docker-compose -f docker-compose.yaml -f docker-compose.build.yaml -f docker-compose.test.yaml run --rm test-runner
-```
-
-Stop the backend-server and its database.
-
-```bash
-# ci/down
-docker-compose -f docker-compose.yaml -f docker-compose.build.yaml -f docker-compose.test.yaml down
-```
-
-### 5.1. Dependencies
+## 3. Dependencies
 
 Dependencies are managed in a few different files.
 
 * Dockerfile - Base image for backend.
-* src/package.json - 3rd party JavaScript libraries for backend.
+* src/package.json - Node.js dependencies.
 * testing/test-runner/Dockerfile - Base image for test-runner.
-* testing/test-runner/package.json - 3rd party JavaScript libraries for test-runner.
+* testing/test-runner/package.json - Node.js dependencies.
 
-Use [yarn](https://yarnpkg.com/) to manage dependencies package.json. You can run yarn using the nodejs docker image.
+Use [yarn](https://yarnpkg.com/) to manage dependencies in `package.json`.
 
-```bash
-docker run -it --rm -v "$PWD:/w" -w /w node:14-alpine yarn
-```
+### 4. Configuration
 
-For example, to check if there are any outdated packages in test-runner...
-
-```bash
-cd testing/test-runner
-docker run -it --rm -v "$PWD:/w" -w /w node:14-alpine yarn outdated
-```
-
-### 5.2. Configuration
-
-* `docker-compose.yaml` - Configures the test/development environment.
 * `src/openapi.yaml` - Contains the OpenAPI specification of the REST API. It contains metadata related to the API including a version number.
 * `src/config.js` - Contains configuration specific to the implementation of the backend.
