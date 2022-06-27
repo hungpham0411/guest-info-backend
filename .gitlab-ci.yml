@@ -1,36 +1,28 @@
-image: docker:19.03.12
+image: docker:20.10.16
 services:
-  - docker:19.03.12-dind
+  - docker:20.10.16-dind
 
 stages:
-  - commitlint
   - build
-  - release
+  - test
+  - deliver
 
-commitlint:
-  stage: commitlint
-  image: node:12
-  rules:
-    - if: '$CI_COMMIT_BRANCH != $CI_DEFAULT_BRANCH'
-  allow_failure: true
-  before_script:
-    - npm install --save-dev @commitlint/{config-conventional,cli}
-    - chmod +x commitconfig.sh
-    - ./commitconfig.sh
-  script:
-    - npx commitlint --from=$CI_COMMIT_BEFORE_SHA
+include:
+  # - '/devtools/builder/gitlab-ci.yml'
+  # - '/devtools/openapi-validator/gitlab-ci.yml'
+  - '/devtools/lint-shell-scripts/gitlab-ci.yml'
+  - '/devtools/lint-markdown-links/gitlab-ci.yml'
+  - '/devtools/lint-dockerfiles/gitlab-ci.yml'
+  - '/devtools/lint-markdown-files/gitlab-ci.yml'
+  - '/devtools/lint-json-files/gitlab-ci.yml'
+  - '/devtools/lint-pkg-json/gitlab-ci.yml'
+  - '/devtools/commitlint-branch/gitlab-ci.yml'
+  # - '/devtools/deliver/gitlab-ci.yml'
 
-commitlint-default:
-  stage: commitlint
-  image: node:12
-  rules:
-    - if: '$CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH'
-  before_script:
-    - npm install --save-dev @commitlint/{config-conventional,cli}
-    - chmod +x commitconfig.sh
-    - ./commitconfig.sh
-  script:
-    - npx commitlint --from=$CI_COMMIT_BEFORE_SHA
+
+##################################################################
+# Below is the original build and delivery mechanism. Delete after
+# itegrating into the new systems.
 
 variables:
   CONTAINER_TEST_IMAGE: $CI_REGISTRY_IMAGE:$CI_COMMIT_REF_SLUG
@@ -47,7 +39,7 @@ build:
     - docker push $CONTAINER_TEST_IMAGE
 
 release:
-  stage: release
+  stage: deliver
   before_script:
     - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
   script:
