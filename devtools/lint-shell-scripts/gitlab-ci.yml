@@ -1,0 +1,5 @@
+lint-shell-scripts:
+  allow_failure: true
+  stage: test
+  script:
+    - devtools/lint-shell-scripts/bin/run.sh

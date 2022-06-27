@@ -1,0 +1,8 @@
+lint-pkg-json:
+  allow_failure: true
+  stage: test
+  before_script:
+    - apk add bash git
+  script:
+    - devtools/lint-pkg-json/bin/build.sh
+    - devtools/lint-pkg-json/bin/run.sh
