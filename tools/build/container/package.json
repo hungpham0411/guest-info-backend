@@ -1,0 +1,15 @@
+{
+"name": "build",
+  "version": "1.0.0",
+  "description": "Builder for API",
+  "main": "index.js",
+
+  "scripts": {
+  },
+  "author": "",
+  "license": "GPL-3.0",
+
+  "devDependencies": {
+    "@apidevtools/swagger-cli": "^4.0.4"
+  }
+}

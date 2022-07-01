@@ -7,8 +7,8 @@ tests to make integration of new code easier.
 
 ## Related Files
 
-* [.gitlab-ci.yml](../../.gitlab-ci.yml) includes files from the devtools/
-  that run in the CI/CD pipeline. For more information individual devtools,
+* [.gitlab-ci.yml](../../.gitlab-ci.yml) includes files from the tools/
+  that run in the CI/CD pipeline. For more information individual tools,
   see their README.md.
 
 ## Official Documentation

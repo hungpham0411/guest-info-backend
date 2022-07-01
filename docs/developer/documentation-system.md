@@ -11,7 +11,8 @@ Client and Developer Guides
 
 * Written in [Markdown](https://www.markdownguide.org/basic-syntax/)
 * Rendered and browsed in GitLab
-* Each devtool has a `README.md` which is the entrypoint
-to its documentation.
-* Similar to devtools, each sub-component has a `README.md`
-which is the entrypoint to its documentation.
+* Automated Testing Tools (Run by `commands/test.sh`):
+  * [markdown-link-check](https://github.com/tcort/markdown-link-check#readme)
+  * [markdownlint](https://github.com/DavidAnson/markdownlint)
+  * [markdownlint-cli2](https://github.com/DavidAnson/markdownlint-cli2)
+  * [swagger-cli](https://www.npmjs.com/package/swagger-cli)

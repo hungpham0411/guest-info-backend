@@ -1,8 +1,0 @@
-lint-json-files:
-  allow_failure: true
-  stage: test
-  before_script:
-    - apk add bash git
-  script:
-    - devtools/lint-json-files/bin/build.sh
-    - devtools/lint-json-files/bin/run.sh

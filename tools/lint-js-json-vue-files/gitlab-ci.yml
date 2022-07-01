@@ -1,0 +1,8 @@
+lint-js-json-vue-files:
+  stage: lint
+  allow_failure: true
+  before_script:
+    - apk add bash git
+  script:
+    - tools/lint-js-json-vue-files/commands/build.sh
+    - tools/lint-js-json-vue-files/commands/run.sh

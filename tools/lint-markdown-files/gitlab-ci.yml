@@ -1,0 +1,7 @@
+lint-markdown-files:
+  stage: lint
+  allow_failure: true
+  before_script:
+    - apk add bash git
+  script:
+    - tools/lint-markdown-files/commands/run.sh
