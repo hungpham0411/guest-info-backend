@@ -17,24 +17,28 @@ include:
   - '/tools/lint-package-json/gitlab-ci.yml'
   - '/tools/lint-commits-on-branch/gitlab-ci.yml'
 
-##################################################################
-# Below is the original build and delivery mechanism. Delete after
-# itegrating into the new systems.
+#########################################################################
+# Build and push a backend server image to GitLab for the current branch.
+
+variables:
+  CONTAINER_TEST_IMAGE: $CI_REGISTRY_IMAGE:$CI_COMMIT_REF_SLUG
+
+build:
+  stage: build
+  needs: []
+  before_script:
+    - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
+  script:
+    - docker compose build --pull backend
+    - docker tag backend $CONTAINER_TEST_IMAGE
+    - docker push $CONTAINER_TEST_IMAGE
+
+###################################
+# Original release mechanism
+# TODO: Integrate.
 
 # variables:
-#   CONTAINER_TEST_IMAGE: $CI_REGISTRY_IMAGE:$CI_COMMIT_REF_SLUG
 #   CONTAINER_RELEASE_IMAGE: $CI_REGISTRY_IMAGE:latest
-
-# build:
-#   stage: build
-#   before_script:
-#     - apk add docker-compose
-#     - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
-#   script:
-#     - docker-compose build --pull backend
-#     - docker tag backend $CONTAINER_TEST_IMAGE
-#     - docker push $CONTAINER_TEST_IMAGE
-
 # release:
 #   stage: deliver
 #   before_script:

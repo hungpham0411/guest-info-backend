@@ -11,5 +11,4 @@ This calls the "test" script defined in the commands folder.
 documentation tests, etc.). Other scripts may be defined to run individual
 tests.
 
-Each linter and validate-openapi is documented in each's subdirectory under
-[/tools/](../../tools/).
+Each linter is documented in each's subdirectory under [/tools/](../../tools/).
