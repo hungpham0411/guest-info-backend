@@ -78,7 +78,7 @@
    static async update(id, guestData) {
      try {
        const guestsCollections = await getGuestsCollection();
-       const guest = await guestsCollections.updateOne(
+       await guestsCollections.updateOne(
          //query
          { studentID: id},
          //request body

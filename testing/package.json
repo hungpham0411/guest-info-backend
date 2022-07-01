@@ -1,4 +1,5 @@
 {
+  "name": "testing",
   "scripts": {
     "test": "mocha"
   },

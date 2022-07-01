@@ -24,9 +24,13 @@ To run the server
 npm run dev-server
 ```
 
-but, remember to give `environment` variables before run, `environment` variables are in `src/lib/config.js` where each environment variable is assigned with `process.env.<something>`
+but, remember to give `environment` variables before run, `environment`
+variables are in `src/lib/config.js` where each environment variable is
+assigned with `process.env.<something>`
 
-**Please notice this repository for some reason will not run with `node` but run with `nodemon`, we were not able to find out the reason during our time, you can try it if you want!!!**
+**Please notice this repository for some reason will not run with `node` but
+run with `nodemon`, we were not able to find out the reason during our time,
+you can try it if you want!!!**
 
 ## 2. Use via Docker Compose (Recommended, no need to reconfig ENV every run)
 
@@ -38,10 +42,11 @@ Run docker-compose.dev.yaml to start a binded `nodemon` repository
 docker-compose -f docker-compose.dev.yaml up 
 ```
 
-Try changing your file and see the message from terminal, it will differ from production execution
+Try changing your file and see the message from terminal, it will differ from
+production execution
 
 - Rebuild image if needed
-- 
+
 ```bash
 docker-compose build 
 ```
@@ -74,8 +79,9 @@ docker-compose build
 docker-compose down
 ```
 
-The server will run on `localhost:10350` and you will be able to see server output in the other console.
-Visit <http://localhost:15672> to view the RabbitMQ gui.
+The server will run on `localhost:10350` and you will be able to see server
+output in the other console.
+Visit `http://localhost:15672` to view the RabbitMQ gui.
 
 ## 3. Dependencies
 
@@ -90,5 +96,7 @@ Use [yarn](https://yarnpkg.com/) to manage dependencies in `package.json`.
 
 ### 4. Configuration
 
-- `src/openapi.yaml` - Contains the OpenAPI specification of the REST API. It contains metadata related to the API including a version number.
-- `src/config.js` - Contains configuration specific to the implementation of the backend.
+- `src/openapi.yaml` - Contains the OpenAPI specification of the REST API.
+- It contains metadata related to the API including a version number.
+- `src/config.js` - Contains configuration specific to the implementation of
+- the backend.

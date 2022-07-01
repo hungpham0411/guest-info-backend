@@ -1,5 +1,4 @@
 // source: https://medium.com/swlh/communicating-using-rabbitmq-in-node-js-e63a4dffc8bb
-const amqp = require('amqplib');
 const amqplib = require('amqplib/callback_api');
 const config = require('./config');
 const logger = require('./logger');

@@ -29,10 +29,6 @@ flag-error() {
 "${DEVTOOLS}/lint-commits-on-branch/commands/build.sh" || flag-error
 "${DEVTOOLS}/lint-commits-on-branch/commands/run.sh" || flag-error
 
-# Validators
-"${DEVTOOLS}/validate-openapi/commands/build.sh" || flag-error
-"${DEVTOOLS}/validate-openapi/commands/run.sh" || flag-error
-
 if [[ $EXIT_CODE -ne 0 ]] ; then
     echo "ERROR: Check output above."
 fi

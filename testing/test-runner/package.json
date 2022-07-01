@@ -1,4 +1,5 @@
 {
+  "name": "test-runner",
   "scripts": {
     "test": "mocha"
   },

@@ -35,7 +35,7 @@ module.exports = {
                     "4"
                 ]
             }
-        };
+        }
         return axios.put("/guest/" + id, data);
     }
 };
