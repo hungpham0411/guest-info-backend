@@ -3,14 +3,14 @@ const expect = chai.expect;
 const { updateGuest } = require('./lib/api.js');
 
 describe("update (PUT /guest/:studentID)", function () {
-    context("ID exist", function() {
-        async function updateExistingGuest(){
-            let response = await updateGuest();
-            let guest = response.data;
-            guest.resident = false;
-            return updateGuest(guest);
-        }
-    })
+    // context("ID exist", function() {
+    //     async function updateExistingGuest(){
+    //         let response = await updateGuest();
+    //         let guest = response.data;
+    //         guest.resident = false;
+    //         return updateGuest(guest);
+    //     }
+    // })
 
     context("ID does not exist", function() {
         async function updateNewGuest() {
