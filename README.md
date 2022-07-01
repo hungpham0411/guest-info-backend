@@ -81,7 +81,9 @@ docker-compose down
 
 The server will run on `localhost:10350` and you will be able to see server
 output in the other console.
-Visit `http://localhost:15672` to view the RabbitMQ gui.
+Visit <!-- markdown-link-check-disable -->
+<http://localhost:15672><!-- markdown-link-check-enable -->
+to view the RabbitMQ gui.
 
 ## 3. Dependencies
 
