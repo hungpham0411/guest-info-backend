@@ -3,46 +3,43 @@ services:
   - docker:20.10.16-dind
 
 stages:
+  - lint
   - build
   - test
   - deliver
 
 include:
-  # - '/devtools/builder/gitlab-ci.yml'
-  # - '/devtools/openapi-validator/gitlab-ci.yml'
-  - '/devtools/lint-shell-scripts/gitlab-ci.yml'
-  - '/devtools/lint-markdown-links/gitlab-ci.yml'
-  - '/devtools/lint-dockerfiles/gitlab-ci.yml'
-  - '/devtools/lint-markdown-files/gitlab-ci.yml'
-  - '/devtools/lint-json-files/gitlab-ci.yml'
-  - '/devtools/lint-pkg-json/gitlab-ci.yml'
-  - '/devtools/commitlint-branch/gitlab-ci.yml'
-  # - '/devtools/deliver/gitlab-ci.yml'
-
+  - '/tools/lint-shell-scripts/gitlab-ci.yml'
+  - '/tools/lint-markdown-links/gitlab-ci.yml'
+  - '/tools/lint-dockerfiles/gitlab-ci.yml'
+  - '/tools/lint-markdown-files/gitlab-ci.yml'
+  - '/tools/lint-js-json-vue-files/gitlab-ci.yml'
+  - '/tools/lint-package-json/gitlab-ci.yml'
+  - '/tools/lint-commits-on-branch/gitlab-ci.yml'
 
 ##################################################################
 # Below is the original build and delivery mechanism. Delete after
 # itegrating into the new systems.
 
-variables:
-  CONTAINER_TEST_IMAGE: $CI_REGISTRY_IMAGE:$CI_COMMIT_REF_SLUG
-  CONTAINER_RELEASE_IMAGE: $CI_REGISTRY_IMAGE:latest
+# variables:
+#   CONTAINER_TEST_IMAGE: $CI_REGISTRY_IMAGE:$CI_COMMIT_REF_SLUG
+#   CONTAINER_RELEASE_IMAGE: $CI_REGISTRY_IMAGE:latest
 
-build:
-  stage: build
-  before_script:
-    - apk add docker-compose
-    - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
-  script:
-    - docker-compose build --pull backend
-    - docker tag backend $CONTAINER_TEST_IMAGE
-    - docker push $CONTAINER_TEST_IMAGE
+# build:
+#   stage: build
+#   before_script:
+#     - apk add docker-compose
+#     - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
+#   script:
+#     - docker-compose build --pull backend
+#     - docker tag backend $CONTAINER_TEST_IMAGE
+#     - docker push $CONTAINER_TEST_IMAGE
 
-release:
-  stage: deliver
-  before_script:
-    - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
-  script:
-    - docker pull $CONTAINER_TEST_IMAGE
-    - docker tag $CONTAINER_TEST_IMAGE $CONTAINER_RELEASE_IMAGE
-    - docker push $CONTAINER_RELEASE_IMAGE
+# release:
+#   stage: deliver
+#   before_script:
+#     - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
+#   script:
+#     - docker pull $CONTAINER_TEST_IMAGE
+#     - docker tag $CONTAINER_TEST_IMAGE $CONTAINER_RELEASE_IMAGE
+#     - docker push $CONTAINER_RELEASE_IMAGE

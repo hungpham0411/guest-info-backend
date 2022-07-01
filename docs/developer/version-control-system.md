@@ -70,29 +70,8 @@ This is an extension that will concatenate files from
 We follow
 [Conventional Commits](https://www.conventionalcommits.org/en/v1.0.0/)
 when writing commit messages.
-Here are some common types.
 
-* `feat:` - A commit that adds new functionality from the client's perspective.
-* `fix:` - A commit that fixes a bug in existing functionality from the
-    client's perspective.
-* `refactor:` - A change to production code that add new functionality
-    or fix a bug from the client's perspective. However, it may remove
-    functionality (which should have an exclamation point `refactor!:`).
-    Typically used to redesign product code to make it easier to add more
-    functionality or improve performance in the future, or to make the
-    code more readable and understandable.
-* `docs:` - A change in the documentation or documentation system.
-* `build:` - A change in the build system.
-* `test:` - A change in a test or the test system.
-* `ci:` - A change in the continuous integration and delivery/deployment
-    system.
-* `chore:` - A task performed to maintain the system. E.g., bumping the
-    version number of the product. Upgrading the version of a dependency.
-    These changes do not improve anything, but must be done as part of
-    normal operation.
-
-The definition of "client" depends on the project. For the API
-project, its clients are Frontend and Backend. For the Frontend, its
-clients are people who use the frontend.
+Our [merge request template](../../.gitlab/merge_request_templates/squashing.md)
+has more details and examples.
 
 See [How to Write Better Git Commit Messages](https://www.freecodecamp.org/news/how-to-write-better-git-commit-messages/)

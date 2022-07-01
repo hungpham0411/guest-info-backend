@@ -1,7 +1,0 @@
-lint-dockerfiles:
-  allow_failure: true
-  stage: test
-  before_script:
-    - apk add bash git
-  script:
-    - devtools/lint-dockerfiles/bin/run.sh

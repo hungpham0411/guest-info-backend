@@ -12,28 +12,6 @@ to learn how to install and run the development environment.
 The information below is about how to configure and install
 new extension and tools into the development environment.
 
-## How we created the initial DevContainer
-
-Here are the steps we took to build the initial DevContainer. You should
-not have to do this unless you are rebuilding the DevContainer for this
-project or building a new DevContainer for your own project. Note: Things
-may have changed after we followed these steps. For more information on
-how to create a DevContainer see here:
-<https://code.visualstudio.com/docs/remote/create-dev-container>
-
-1. Select the Remote Window Indicator (green icon on bottom left of VSCode)
-2. Select `Open Folder in Container`
-3. After popup, select the folder you want to Containerize
-4. Select `Node.js`
-5. Select `18` for version
-6. Click OK for extensions (Don't select any extensions. Starting the container
-  may take a few minutes)
-7. You should see a new .devcontainer folder in your repository
-
-**IMPORTANT**: After changing *ANY* files in the `.devcontainer` folder,
-you must go back to the remote window indicator and select `Rebuild Container`.
-If you don't, your container will **NOT** use your changes.
-
 ## Resources
 
 * [VS Code DevContainers](https://code.visualstudio.com/docs/remote/containers)
@@ -121,7 +99,28 @@ echo 'export TZ="ENTER_TIMEZONE"' >> ~/.bashrc
 
 Your TZ should be set the next time you open a new bash shell.
 
----
+## How we created the initial DevContainer
+
+You should not have to complete this section unless you are building a new
+DevContainer for this project or building a DevContainer for your own project.
+
+Here are the steps we took to build the initial DevContainer.  Note: Things
+may have changed after we followed these steps. For more information on
+how to create a DevContainer see here:
+<https://code.visualstudio.com/docs/remote/create-dev-container>
+
+1. Select the Remote Window Indicator (green icon on bottom left of VSCode)
+2. Select `Open Folder in Container`
+3. After popup, select the folder you want to Containerize
+4. Select `Node.js`
+5. Select `18` for version
+6. Click OK for extensions (Don't select any extensions. Starting the container
+  may take a few minutes)
+7. You should see a new .devcontainer folder in your repository
+
+**IMPORTANT**: After changing *ANY* files in the `.devcontainer` folder,
+you must go back to the remote window indicator and select `Rebuild Container`.
+If you don't, your container will **NOT** use your changes.
 
 ## See also
 

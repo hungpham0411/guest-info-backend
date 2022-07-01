@@ -11,6 +11,14 @@ identify tools and libraries that the project uses that are out
 of date and/or contain vulnerabilities, and helps us upgrade or
 downgrade the versions of the tools and libraries we are using.
 
+Most of the tools/components of this project are packaged into separate
+Docker images. So we can manage the dependencies of each tool/component
+separately. Many of the tools also use NodeJS and its npm package manager
+to manage the dependencies of node modules that are installed into their
+containers. So managing dependencies in this project requires an
+understanding of concepts related to both Docker and Node/npm. We describe
+these briefly below and provide links to help you get started.
+
 ## Development dependencies vs application dependencies
 
 Before you start managing dependencies, you'll need to distinguish between

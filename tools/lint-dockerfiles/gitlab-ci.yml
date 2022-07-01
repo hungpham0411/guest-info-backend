@@ -1,0 +1,7 @@
+lint-dockerfiles:
+  stage: lint
+  allow_failure: true
+  before_script:
+    - apk add bash git
+  script:
+    - tools/lint-dockerfiles/commands/run.sh

@@ -1,0 +1,46 @@
+# This file is written in YAML. Many examples of semantic-release configuration
+# are in JSON. Here is a site that can help you convert between the two:
+# https://www.json2yaml.com/ . Also here is a project that uses
+# semantic-release and specifies its configuration using YAML:
+# https://github.com/GeekHomeInside/semantic-release-example/blob/master/.releaserc.yaml
+
+branches:
+    # Only run on main.
+    - main
+
+plugins:
+    # Order matters.
+
+    -   - "@semantic-release/commit-analyzer"
+        # Analyzes the commit messages since the last release
+        # and determines the next version number.
+        # Populates ${nextRelease.version} among other variables.
+        - preset: conventionalcommits
+
+    -   - "@semantic-release/release-notes-generator"
+        # Formats release notes based on commit messages, placing them
+        # in ${nextRelease.notes}.
+        - preset: conventionalcommits
+
+    -   - "@semantic-release/exec"
+        - prepareCmd: "./tools/deliver/deliver-openapi.sh ${nextRelease.version}"
+
+    -   - "@semantic-release/gitlab"
+        # Creates GitLab release entry and uploads specified assets.
+        - assets:
+            - docs/openapi.yaml
+
+    -   - "@semantic-release/git"
+        # Creates and pushes release tag and commit. Commit includes
+        # specified assets.
+        - assets:
+            - docs/openapi.yaml
+          message: |
+            chore(deliver): ${nextRelease.version} [skip ci]
+
+            ${nextRelease.notes}
+          # "|" Starts a multiline string that preserves newline characters
+          # but not leading whitespace.
+          # ${nextRelease.*} variables are defined by earlier plugins.
+          # [skip ci] in the commit message tells GitLab to not trigger a
+          # pipeline for this commit, avoiding infinite recursion.
