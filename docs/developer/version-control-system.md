@@ -71,7 +71,7 @@ We follow
 [Conventional Commits](https://www.conventionalcommits.org/en/v1.0.0/)
 when writing commit messages.
 
-Our [merge request template](../../.gitlab/merge_request_templates/squashing.md)
+Our [merge request template](../../.gitlab/merge_request_templates/default.md)
 has more details and examples.
 
 See [How to Write Better Git Commit Messages](https://www.freecodecamp.org/news/how-to-write-better-git-commit-messages/)
