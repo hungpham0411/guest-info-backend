@@ -38,7 +38,6 @@ async function buildApp() {
 
   mountEndpoints(app);
 
-  //@ts-ignore
   app.use((err, req, res, next) => {
     if (res.headersSent) {
       return next(err);
@@ -69,7 +68,6 @@ const getServerStatus = () => {
       "DB Connected": mongoConnected,
       "Rabbit Connected": rabbitConnected
     })
-  // @ts-ignore
   }, config.TIME_OUT)
 }
 

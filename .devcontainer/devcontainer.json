@@ -27,7 +27,8 @@
 		"DavidAnson.vscode-markdownlint",
 		"codezombiech.gitignore",
 		"hashhar.gitattributes",
-		"timonwong.shellcheck"
+		"timonwong.shellcheck",
+		"esbenp.prettier-vscode"
 	],
 
 	// Use 'forwardPorts' to make a list of ports inside the container available locally.

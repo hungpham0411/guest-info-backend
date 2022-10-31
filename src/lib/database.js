@@ -1,4 +1,3 @@
-// @ts-nocheck
 /*
 
   database.js provides a connected MongoClient that should be reused across
@@ -28,7 +27,6 @@ const MongoClient = require("mongodb").MongoClient;
 
 const config = require("./config");
 
-
 class Database {
   static #singleton;
 
@@ -48,6 +46,5 @@ class Database {
     return Database.#singleton;
   }
 }
-
 
 module.exports = Database;

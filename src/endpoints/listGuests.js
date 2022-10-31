@@ -1,19 +1,21 @@
 const logger = require("../lib/logger");
 const Guests = require("../Data/guest");
 
-/** 
- * endpoints.js is responsible for responding to requests for each endpoint in the REST API.
- * @type {import("../lib/mount-endpoints").EndpointObject} 
- * */
-const getAllGuests = {
+const listGuests = {
   method: 'get',
-  path: '/guest/list',
+  path: '/guests',
   async handler(request, response) {
     try {
-      const guests = await Guests.getAll();
+      let resident = request.query.resident;
+      let guests;
+      if (resident === undefined) {
+        guests = await Guests.getAll();
+      } else {
+        guests = await Guests.getByResident(resident);
+      }
       response.status(200).json(guests);
     } catch (e) {
-      logger.error("Endpoints.getAllGuests", e);
+      logger.error("Endpoints.listGuests", e);
       response.status(500).json({
         status: 500,
         error: "Internal Server Error",
@@ -23,4 +25,4 @@ const getAllGuests = {
   }
 };
 
-module.exports = getAllGuests
+module.exports = listGuests
