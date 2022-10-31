@@ -3,42 +3,33 @@
  * Mongo database. In architecture parlance, it is a Data Access Object.
  * It abstracts away the details of interact with the database.
  */
- const Database = require("../lib/database");
- const logger = require("../lib/logger");
- 
- /**
-  * @typedef {Object} Assistance
-  * @property {boolean} socSec
-  * @property {boolean} TANF
-  * @property {boolean} finAid
-  * @property {boolean} other
-  * @property {boolean} SNAP
-  * @property {boolean} WIC
-  * @property {boolean} breakfast
-  * @property {boolean} lunch
-  * @property {boolean} SFSP
-  */
- 
- /**
-  * @typedef {Object} Guest
-  * @property {string | undefined} _id
-  * @property {string} studentID
-  * @property {boolean} resident
-  * @property {string} zipCode
-  * @property {boolean} unemployment
-  * @property {Assistance[]} assistance
-  * @property {number} studentAge
-  * @property {number} numberInHousehold
-  */
- 
- class Guests {
-  /**
-   * 
-   */ 
-  static async getAll(){
+const Database = require("../lib/database");
+const logger = require("../lib/logger");
+const dev = true;
+
+class Guests {
+
+  static async existsInDB(id) {
     try {
       const guestsCollection = await getGuestsCollection();
-      const guest_cursor = await guestsCollection.find();
+      let guest = await guestsCollection.findOne({ wsuID: id }, { projection: { _id: 0 } });
+      console.log(guest !== null);
+      return guest !== null;
+    } catch (e) {
+      logger.error("GuestsAccessObject.getAll", e);
+      throw {
+        code: 500,
+        error: "Internal Server Error",
+        caused_by: e,
+      };
+    }
+  }
+
+  static async getAll() {
+    try {
+      const guestsCollection = await getGuestsCollection();
+      // {_id:0} does not return _id field
+      const guest_cursor = await guestsCollection.find({}, { projection: { _id: 0 } });
       let guests = await guest_cursor.toArray();
       return guests;
     } catch (e) {
@@ -46,71 +37,92 @@
       throw {
         code: 500,
         error: "Internal Server Error",
-        caused_by: e
-      }
+        caused_by: e,
+      };
     }
-   }
+  }
 
-   /**
-    * @param {string} id
-    * @returns {Promise<Guest>}
-    */
-   static async getOne(id) {
-     try {
-       const guestsCollection = await getGuestsCollection();
-       let guest = await guestsCollection.findOne({ studentID: id});
-       return guest;
-     } catch (e) {
-       logger.error("GuestsAccessObject.getAll", e);
-       throw {
-         code: 500,
-         error: "Internal Server Error",
-         caused_by: e
-       }
-     }
-   }
- 
-   /**
-    * @param {string} id
-    * @param {any} guestData
-    * @returns {Promise<Guest>}
-    */
-   static async update(id, guestData) {
-     try {
-       const guestsCollections = await getGuestsCollection();
-       await guestsCollections.updateOne(
-         //query
-         { studentID: id},
-         //request body
-         {
-           $set:
-           {
+  static async getOne(id) {
+    try {
+      const guestsCollection = await getGuestsCollection();
+      let guest = await guestsCollection.findOne({ wsuID: id }, { projection: { _id: 0 } });
+      return guest;
+    } catch (e) {
+      logger.error("GuestsAccessObject.getAll", e);
+      throw {
+        code: 500,
+        error: "Internal Server Error",
+        caused_by: e,
+      };
+    }
+  }
+
+  static async getByResident(residentVal) {
+    try {
+      const guestsCollection = await getGuestsCollection();
+      let guest_cursor = await guestsCollection.find({ resident: residentVal }, { projection: { _id: 0 } });
+      let guests = await guest_cursor.toArray();
+      return guests;
+    } catch (e) {
+      logger.error("GuestsAccessObject.getAll", e);
+      throw {
+        code: 500,
+        error: "Internal Server Error",
+        caused_by: e,
+      };
+    }    
+  }
+
+  static async create(guestData) {
+    const guestsCollection = await getGuestsCollection();
+    const result = await guestsCollection.insertOne(guestData);
+    let guest = await guestsCollection.findOne({ _id: result.insertedId }, { projection: { _id: 0 } });
+    return guest;
+  }
+
+  static async update(id, guestData) {
+    try {
+      const guestsCollections = await getGuestsCollection();
+      await guestsCollections.updateOne(
+        //query
+        { wsuID: id },
+        //request body
+        {
+          $set: {
             resident: guestData.resident,
             zipCode: guestData.zipCode,
             unemployment: guestData.unemployment,
             assistance: guestData.assistance,
-            studentAge: guestData.studentAge,
-            numberInHousehold: guestData.numberInHousehold
-           }
-         },
-         //if query match with existed data, update, otherwise, insert new data
-         { upsert: true}
-       )
-       return guestData;
-     } catch (e) {
-       logger.error("GuestsAccessObject.update", e);
-       throw {
-         code: 500,
-         error: "Internal Server Error",
-         caused_by: e
-       };
-     }
-   }
- }
- 
- async function getGuestsCollection() {
-   const database = await Database.get();
-   return database.db("guests").collection("guests");
- }
- 
- module.exports = Guests; 
+            guestAge: guestData.guestAge,
+            numberInHousehold: guestData.numberInHousehold,
+          },
+        },
+        //if query match with existed data, update, otherwise, insert new data
+        { upsert: true }
+      );
+      return guestData;
+    } catch (e) {
+      logger.error("GuestsAccessObject.update", e);
+      throw {
+        code: 500,
+        error: "Internal Server Error",
+        caused_by: e,
+      };
+    }
+  }
+
+  static async deleteOne(id) {
+    const guestsCollection = await getGuestsCollection();
+    const result = await guestsCollection.deleteOne(
+      { wsuID: id }
+    );
+    return result.deletedCount >= 1;
+  }
+}
+
+async function getGuestsCollection() {
+  const database = await Database.get();
+  return database.db("guests").collection("guests");
+}
+
+module.exports = Guests;

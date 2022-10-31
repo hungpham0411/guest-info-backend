@@ -1,17 +1,25 @@
-GET http://localhost:10350/guest/list
+GET http://localhost:10350/version
 
 ###
-GET http://localhost:10350/guest/1234567
+GET http://localhost:10350/guests
 
 ###
-//Trigger this PUT the first time will create new student with ID: 1234567, the second time it will update the student data
-PUT http://localhost:10350/guest/1234567 HTTP/1.1
+GET http://localhost:10350/guests/123456
+
+###
+GET http://localhost:10350/guests?resident=true
+
+###
+DELETE http://localhost:10350/guests/1234567
+
+###
+POST http://localhost:10350/guests HTTP/1.1
 content-type: application/json
 
 {
-  "studentID": "1234567",
+  "wsuID": "1234567",
   "resident": true,
-  "zipCode": "01610",
+  "zipCode": "01602",
   "unemployment": false,
   "assistance": {
     "socSec": false,
@@ -24,17 +32,17 @@ content-type: application/json
     "lunch": false,
     "SFSP": false
   },
-  "studentAge": 42, 
+  "guestAge": 42, 
   "numberInHousehold": 4
 }
 
 ###
-PUT http://localhost:10350/guest/1234568 HTTP/1.1
+POST http://localhost:10350/guests HTTP/1.1
 content-type: application/json
 
 {
-  "studentID": "1234568",
-  "resident": true,
+  "wsuID": "1234568",
+  "resident": false,
   "zipCode": "01603",
   "unemployment": false,
   "assistance": {
@@ -48,6 +56,30 @@ content-type: application/json
     "lunch": false,
     "SFSP": false
   },
-  "studentAge": 42, 
+  "guestAge": 42, 
   "numberInHousehold": 4
+}
+
+###
+PUT http://localhost:10350/guests/1234561 HTTP/1.1
+content-type: application/json
+
+{
+  "wsuID": "1234567",
+  "resident": true,
+  "zipCode": "01602",
+  "unemployment": false,
+  "assistance": {
+    "socSec": false,
+    "TANF": false,
+    "finAid": false,
+    "other": false,
+    "SNAP": false,
+    "WIC": false,
+    "breakfast": false,
+    "lunch": false,
+    "SFSP": false
+  },
+  "guestAge": 42, 
+  "numberInHousehold": 5
 }

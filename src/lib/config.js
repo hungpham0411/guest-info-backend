@@ -13,21 +13,8 @@ const yaml = require('js-yaml');
 const { readFileSync } = require('fs');
 const ROOT_DIR = path.join(__dirname, "..", "..");
 
-/**
- * @typedef {Object} Config
- * @property {string} ROOT_DIR
- * @property {string} HOST_BASE_URL
- * @property {number} SERVER_PORT
- * @property {any} RABBITMQ_URL
- * @property {any} MONGO_URI
- * @property {any} OPENAPI_SCHEMA
- * @property {string} ENDPOINTS_DIR
- * @property {string} API_VERSION
- */
-
 // Define config, a simple object that contains configuration values
 // that will be use throughout the application.
-/** @type {Config} config */
 const config = {
 
   // The root directory of this project. Note that this will be some path
@@ -58,7 +45,6 @@ const config = {
 
 /**
  * Load API version directly from openapi.yaml
- * @type {any} apiSchema
  */
 const apiSchema = yaml.load(readFileSync(config.OPENAPI_SCHEMA, 'utf8'));
 config.API_VERSION = apiSchema.info.version;

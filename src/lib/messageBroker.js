@@ -4,13 +4,10 @@ const config = require('./config');
 const logger = require('./logger');
 
 class rabbitMQBroker {
-  /** @type {import('amqplib/callback_api').Channel} */
   static channel;
 
-  /** @returns {Promise<import('amqplib/callback_api').Channel>} */
   static async getChannel() {
     if (rabbitMQBroker.channel === undefined) {
-      /** @type {import('amqplib/callback_api').Channel} */
       const result = await new Promise(function (resolve, reject) {
         amqplib.connect(config.RABBITMQ_URL, function (connectionError, connection) {
           if (connectionError)
@@ -47,7 +44,6 @@ class rabbitMQBroker {
 }
 
 class MessageBroker {
-  /** @returns {Promise<import('amqplib/callback_api').Channel>} */
   static async getChannel() {
     return rabbitMQBroker.getChannel()
   }
