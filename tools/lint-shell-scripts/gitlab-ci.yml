@@ -1,5 +1,0 @@
-lint-shell-scripts:
-  stage: lint
-  allow_failure: true
-  script:
-    - tools/lint-shell-scripts/commands/run.sh

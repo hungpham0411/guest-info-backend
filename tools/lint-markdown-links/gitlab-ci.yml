@@ -1,7 +1,0 @@
-lint-markdown-links:
-  stage: lint
-  allow_failure: true
-  before_script:
-    - apk add bash git
-  script:
-    - tools/lint-markdown-links/commands/run.sh

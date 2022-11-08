@@ -1,8 +1,0 @@
-lint-package-json:
-  allow_failure: true
-  stage: lint
-  before_script:
-    - apk add bash git
-  script:
-    - tools/lint-package-json/commands/build.sh
-    - tools/lint-package-json/commands/run.sh
