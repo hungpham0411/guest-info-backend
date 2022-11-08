@@ -1,49 +1,11 @@
-image: docker:20.10.16
-services:
-  - docker:20.10.16-dind
-
-stages:
-  - lint
-  - build
-  - test
-  - deliver
-
 include:
-  - '/tools/lint-shell-scripts/gitlab-ci.yml'
-  - '/tools/lint-markdown-links/gitlab-ci.yml'
-  - '/tools/lint-dockerfiles/gitlab-ci.yml'
-  - '/tools/lint-markdown-files/gitlab-ci.yml'
-  - '/tools/lint-js-json-vue-files/gitlab-ci.yml'
-  - '/tools/lint-package-json/gitlab-ci.yml'
-  - '/tools/lint-commits-on-branch/gitlab-ci.yml'
-
-#########################################################################
-# Build and push a backend server image to GitLab for the current branch.
+  - remote: https://gitlab.com/LibreFoodPantry/common-services/tools/pipeline/-/raw/main/source/gitlab-ci/pipeline.yml
 
 variables:
-  CONTAINER_TEST_IMAGE: $CI_REGISTRY_IMAGE:$CI_COMMIT_REF_SLUG
+  DISABLE_JOBS: ""
 
-build:
-  stage: build
-  needs: []
-  before_script:
-    - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
-  script:
-    - docker compose build --pull backend
-    - docker tag backend $CONTAINER_TEST_IMAGE
-    - docker push $CONTAINER_TEST_IMAGE
+  # The local name of the Docker image built by the build command and
+  # tested by the test command. Ignored, if build doesn't produce an image.
+  IMAGE_NAME: $CI_PROJECT_NAME:latest
 
-###################################
-# Original release mechanism
-# TODO: Integrate.
-
-# variables:
-#   CONTAINER_RELEASE_IMAGE: $CI_REGISTRY_IMAGE:latest
-# release:
-#   stage: deliver
-#   before_script:
-#     - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
-#   script:
-#     - docker pull $CONTAINER_TEST_IMAGE
-#     - docker tag $CONTAINER_TEST_IMAGE $CONTAINER_RELEASE_IMAGE
-#     - docker push $CONTAINER_RELEASE_IMAGE
+  BUILD_COMMAND: ./commands/build.sh
