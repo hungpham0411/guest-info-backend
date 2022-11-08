@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-PROJECT_ROOT="$(git rev-parse --show-toplevel)"
+SCRIPT_DIR="$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )"
 
-cd "$PROJECT_ROOT" || exit 1
-docker compose up
+cd "$SCRIPT_DIR/.."
+docker compose -f "${SCRIPT_DIR}"/../src/docker-compose.yaml up
