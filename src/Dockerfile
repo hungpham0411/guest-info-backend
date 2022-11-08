@@ -8,7 +8,7 @@ FROM node:14-alpine as build
 WORKDIR /src
 
 # Install dependencies.
-COPY ./src/package.json ./src/yarn.lock ./
+COPY ./package.json ./yarn.lock ./
 RUN yarn install
 
 ###

@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 
-PROJECT_ROOT="$(git rev-parse --show-toplevel)"
+SCRIPT_DIR="$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )"
 
-cd "$PROJECT_ROOT" || exit 1
-docker compose build backend
+cd "$SCRIPT_DIR/.."
+PROJECT_NAME="$( basename "$( pwd )" )"
+docker build -t "$PROJECT_NAME" "${SCRIPT_DIR}"/../src

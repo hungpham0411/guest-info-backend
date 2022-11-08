@@ -11,7 +11,6 @@ RUN apt-get update && export DEBIAN_FRONTEND=noninteractive \
         silversearcher-ag=2.2.0+git20200805-1+b1 \
     && rm -rf /var/lib/apt/lists/*
 
-
 # [Optional] Uncomment if you want to install an additional version of node using nvm
 # ARG EXTRA_NODE_VERSION=10
 # RUN su node -c "source /usr/local/share/nvm/nvm.sh && nvm install ${EXTRA_NODE_VERSION}"
