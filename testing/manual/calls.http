@@ -4,7 +4,7 @@ GET http://localhost:10350/version
 GET http://localhost:10350/guests
 
 ###
-GET http://localhost:10350/guests/123456
+GET http://localhost:10350/guests/1234567
 
 ###
 GET http://localhost:10350/guests?resident=true
@@ -65,7 +65,7 @@ PUT http://localhost:10350/guests/1234561 HTTP/1.1
 content-type: application/json
 
 {
-  "wsuID": "1234567",
+  "wsuID": "1234561",
   "resident": true,
   "zipCode": "01602",
   "unemployment": false,

@@ -10,7 +10,7 @@ const replaceGuest = {
       const id = request.params.id;
       const guestData = request.body;
 
-      if ( await Guests.existsInDB(request.body.wsuID) ) {
+      if ( await Guests.existsInDB(id) ) {
         // update mongodb
         await Guests.update(id, guestData);
         const guest = await Guests.getOne(id);
