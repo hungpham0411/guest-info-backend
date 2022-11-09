@@ -1,104 +1,43 @@
-# Manage Items Backend REST API Server
+# Guest Info System Backend Server
 
-> IMPORTANT: This project is not intended for production environments.
-> It was built as an educational exercise and is intended to serve as an educational
-> example.
+The GuestInfoBackend provides a REST API server that implements an OpenAPI specification and is called by the GuestInfoFrontend. The developers
+of GuestInfoFrontend are the clients of GuestInfoBackend.
 
-Provides a backend REST API server for managing items in a larger inventory system.
+## Client Guide
 
-src/openapi.yaml contains the specification for the Manage Items API.
+The API implemented by this server is in [lib/openapi.yaml](lib/openapi.yaml). The API can be viewed:
 
-## 1. Normal Use
+* Using the [Swagger Viewer extension for VS Code](https://marketplace.visualstudio.com/items?itemName=Arjun.swagger-viewer) which is installed in the Dev Container for this project.
+* Directly in the [GitLab repository for this project](https://gitlab.com/LibreFoodPantry/client-solutions/theas-pantry/guestinfosystem/guestinfobackend).
 
-Go to `src` and run
+The [source for the GuestInfoAPI](https://gitlab.com/LibreFoodPantry/client-solutions/theas-pantry/guestinfosystem/guestinfoapi) is where development of the API takes place.
 
-```bash
-yarn
-```
+## Developer Guide
 
-to install dependencies
+Getting Started
 
-To run the server
+1. Read [LibreFoodPantry.org](https://librefoodpantry.org/)
+    and join its Discord server.
+2. [Install development environment](docs/developer/install-development-environment.md)
+3. Clone this repository using the following command
 
-```bash
-npm run dev-server
-```
+    ```bash
+    git clone <repository-clone-url>
+    ```
 
-but, remember to give `environment` variables before run, `environment`
-variables are in `src/lib/config.js` where each environment variable is
-assigned with `process.env.<something>`
+4. Open it in VS Code and reopen it in a devcontainer.
+5. [lib/openapi.yaml](lib/openapi.yaml) contains the API specification that the server implements. **This file should not be edited**. If changes are needed in the API, development happens in the [source for the GuestInfoAPI](https://gitlab.com/LibreFoodPantry/client-solutions/theas-pantry/guestinfosystem/guestinfoapi).
+6. Familiarize yourself with the systems used by this project
+  (see Development Infrastructure below).
+7. See [the developer cheat-sheet](docs/developer/cheat-sheet.md) for common
+  commands you'll likely use.
 
-**Please notice this repository for some reason will not run with `node` but
-run with `nodemon`, we were not able to find out the reason during our time,
-you can try it if you want!!!**
+Development Infrastructure
 
-## 2. Use via Docker Compose (Recommended, no need to reconfig ENV every run)
-
-## Development
-
-Run docker-compose.dev.yaml to start a binded `nodemon` repository
-
-```bash
-docker-compose -f docker-compose.dev.yaml up 
-```
-
-Try changing your file and see the message from terminal, it will differ from
-production execution
-
-- Rebuild image if needed
-
-```bash
-docker-compose build 
-```
-
-- Terminate the container
-
-```bash
-docker-compose down
-```
-
-## Production
-
-Download and inspect/configure `docker-compose.yaml`.
-
-Start Docker Compose
-
-```bash
-docker-compose up
-```
-
-- Rebuild image if needed
-
-```bash
-docker-compose build
-```
-
-- Terminate the container
-
-```bash
-docker-compose down
-```
-
-The server will run on `localhost:10350` and you will be able to see server
-output in the other console.
-Visit <!-- markdown-link-check-disable -->
-<http://localhost:15672><!-- markdown-link-check-enable -->
-to view the RabbitMQ gui.
-
-## 3. Dependencies
-
-Dependencies are managed in a few different files.
-
-- Dockerfile - Base image for backend.
-- src/package.json - Node.js dependencies.
-- testing/test-runner/Dockerfile - Base image for test-runner.
-- testing/test-runner/package.json - Node.js dependencies.
-
-Use [yarn](https://yarnpkg.com/) to manage dependencies in `package.json`.
-
-### 4. Configuration
-
-- `src/openapi.yaml` - Contains the OpenAPI specification of the REST API.
-- It contains metadata related to the API including a version number.
-- `src/config.js` - Contains configuration specific to the implementation of
-- the backend.
+* [Automated Testing](docs/developer/automated-testing.md)
+* [Build System](docs/developer/build-system.md)
+* [Continuous Integration](docs/developer/continuous-integration.md)
+* [Dependency Management](docs/developer/dependency-management.md)
+* [Development Environment](docs/developer/development-environment.md)
+* [Documentation System](docs/developer/documentation-system.md)
+* [Version Control System](docs/developer/version-control-system.md)
