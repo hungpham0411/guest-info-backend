@@ -19,22 +19,7 @@ RUN chown -R node:node .
 USER node
 COPY --from=build --chown=node:node /src/node_modules ./src/node_modules
 COPY --chown=node:node . .
-RUN chmod +x /usr/src/app/entrypoint.sh
 
 ENV NODE_ENV=production
 WORKDIR /usr/src/app/src
 CMD [ "yarn", "dev-server" ]
-# ENTRYPOINT [ "/usr/src/app/entrypoint.sh" ]
-# # # # ExpressJS listens on 3000 by default. Expose it.
-# EXPOSE 3000
-
-# # Setting NODE_ENV to production improves efficiencies.
-# # During development, override by passing a development when running
-# # the container. E.g., docker run -e NODE_ENV=development ...
-# ENV NODE_ENV=production
-
-# # When ran, call node on index.js.
-# CMD [ "node", "index.js" ]
-
-# # Install our server code.
-# COPY ./src /app/
