@@ -1,11 +1,10 @@
 # Build System
 
-Builds the backend server image.
-
-To run locally...
+The build system is responsible for building the products
+of this project, which is a Docker image of the GuestInfoBackend server.
 
 ```bash
 commands/build.sh
 ```
 
-To run in CI, see the build job in [.gitlab-ci.yml](../../.gitlab-ci.yml)
+This runs `commands/build.sh` which generates a Docker image of the GuestInfoBackend server.
