@@ -12,11 +12,12 @@ class Guests {
   static async existsInDB(id) {
     try {
       const guestsCollection = await getGuestsCollection();
+      // { projection: { _id: 0 } } does not return _id field
       let guest = await guestsCollection.findOne({ wsuID: id }, { projection: { _id: 0 } });
       console.log(guest !== null);
       return guest !== null;
     } catch (e) {
-      logger.error("GuestsAccessObject.getAll", e);
+      logger.error("GuestsAccessObject.existsInDB", e);
       throw {
         code: 500,
         error: "Internal Server Error",
@@ -28,7 +29,7 @@ class Guests {
   static async getAll() {
     try {
       const guestsCollection = await getGuestsCollection();
-      // {_id:0} does not return _id field
+      // { projection: { _id: 0 } } does not return _id field
       const guest_cursor = await guestsCollection.find({}, { projection: { _id: 0 } });
       let guests = await guest_cursor.toArray();
       return guests;
@@ -45,10 +46,11 @@ class Guests {
   static async getOne(id) {
     try {
       const guestsCollection = await getGuestsCollection();
+      // { projection: { _id: 0 } } does not return _id field
       let guest = await guestsCollection.findOne({ wsuID: id }, { projection: { _id: 0 } });
       return guest;
     } catch (e) {
-      logger.error("GuestsAccessObject.getAll", e);
+      logger.error("GuestsAccessObject.getOne", e);
       throw {
         code: 500,
         error: "Internal Server Error",
@@ -60,11 +62,12 @@ class Guests {
   static async getByResident(residentVal) {
     try {
       const guestsCollection = await getGuestsCollection();
+      // { projection: { _id: 0 } } does not return _id field
       let guest_cursor = await guestsCollection.find({ resident: residentVal }, { projection: { _id: 0 } });
       let guests = await guest_cursor.toArray();
       return guests;
     } catch (e) {
-      logger.error("GuestsAccessObject.getAll", e);
+      logger.error("GuestsAccessObject.getByResident", e);
       throw {
         code: 500,
         error: "Internal Server Error",
@@ -76,6 +79,7 @@ class Guests {
   static async create(guestData) {
     const guestsCollection = await getGuestsCollection();
     const result = await guestsCollection.insertOne(guestData);
+    // { projection: { _id: 0 } } does not return _id field
     let guest = await guestsCollection.findOne({ _id: result.insertedId }, { projection: { _id: 0 } });
     return guest;
   }
