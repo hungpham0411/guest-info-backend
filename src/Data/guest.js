@@ -100,9 +100,7 @@ class Guests {
             guestAge: guestData.guestAge,
             numberInHousehold: guestData.numberInHousehold,
           },
-        },
-        //if query match with existed data, update, otherwise, insert new data
-        { upsert: true }
+        }
       );
       return guestData;
     } catch (e) {
