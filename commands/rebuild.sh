@@ -2,7 +2,7 @@
 
 SCRIPT_DIR="$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )"
 
-cd "$SCRIPT_DIR/.."/commands
+cd "$SCRIPT_DIR/.."/commands || exit
 ./down.sh
 ./build.sh
 ./up.sh

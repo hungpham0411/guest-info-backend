@@ -2,8 +2,7 @@ version: "3.3"
 services:
 
   backend:
-    build: .
-    image: backend
+    image: guestinfobackend
     ports:
       - 10350:10350
     environment:
