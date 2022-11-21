@@ -22,7 +22,7 @@ commands/up.sh
 
 ## Down
 
-Removes the Docker containers and networks. 
+Removes the Docker containers and networks.
 
 The database will be emptied of all data.
 

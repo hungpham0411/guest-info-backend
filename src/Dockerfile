@@ -5,21 +5,22 @@
 FROM node:14-alpine as build
 
 # /app will hold our application. Create it and make it our working directory.
-WORKDIR /src
+WORKDIR /app
 
 # Install dependencies.
-COPY ./package.json ./yarn.lock ./
+COPY ./src/package.json ./src/yarn.lock ./
 RUN yarn install
 
 ###
 FROM node:14-alpine
-WORKDIR /usr/src/app
+WORKDIR /app
 # Best practice: Don't run as root. Instead run as node (created in node image)
 RUN chown -R node:node .
 USER node
-COPY --from=build --chown=node:node /src/node_modules ./src/node_modules
-COPY --chown=node:node . .
+COPY --from=build --chown=node:node /app/node_modules ./src/node_modules
+COPY --chown=node:node ./lib/openapi.yaml ./lib/openapi.yaml
+COPY --chown=node:node ./src ./src
 
 ENV NODE_ENV=production
-WORKDIR /usr/src/app/src
+WORKDIR /app/src
 CMD [ "yarn", "dev-server" ]
