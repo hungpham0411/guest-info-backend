@@ -23,7 +23,7 @@ Do the following on your local machine to squash the commits. The commands are s
       Co-authored-by: First1 Last1 <email1@example.com>
       Co-authored-by: First2 Last2 <email2@example.com>
 
-      Closes #1
+      Closes #<issue-number>
       ```
 
     Here are some common types.
