@@ -10,6 +10,8 @@
  *    logger.warn("some warning message");
  *    logger.debug("some debug message");
  */
+
+"use strict";
 const { transports, createLogger, format } = require('winston');
 
 const logger = createLogger({

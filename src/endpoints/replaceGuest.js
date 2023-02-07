@@ -1,3 +1,4 @@
+"use strict";
 const logger = require("../lib/logger");
 const Guests = require("../Data/guest");
 const MessageBroker = require("../lib/messageBroker");

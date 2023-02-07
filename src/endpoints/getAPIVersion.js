@@ -1,3 +1,4 @@
+"use strict";
 const logger = require("../lib/logger");
 const { API_VERSION } = require("../lib/config");
 

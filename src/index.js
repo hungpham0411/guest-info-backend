@@ -2,6 +2,8 @@
  * index.js is the entrypoint. It creates and starts the server.
  */
 
+"use strict";
+
 // Load builtin libraries.
 const http = require('http');
 

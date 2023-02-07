@@ -1,3 +1,4 @@
+"use strict";
 // source: https://medium.com/swlh/communicating-using-rabbitmq-in-node-js-e63a4dffc8bb
 const amqplib = require('amqplib/callback_api');
 const config = require('./config');
