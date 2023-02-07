@@ -6,7 +6,7 @@ const listGuests = {
   path: '/guests',
   async handler(request, response) {
     try {
-      let resident = request.query.resident;
+      const resident = request.query.resident;
       let guests;
       if (resident === undefined) {
         guests = await Guests.getAll();
