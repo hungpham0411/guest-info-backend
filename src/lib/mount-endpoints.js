@@ -1,3 +1,4 @@
+"use strict";
 const { ENDPOINTS_DIR } = require('./config.js');
 const fs = require('fs');
 const path = require('path');

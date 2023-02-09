@@ -8,6 +8,7 @@
  *    const rootDirectory = config.ROOT_DIR;
  */
 
+"use strict";
 const path = require('path');
 const yaml = require('js-yaml');
 const { readFileSync } = require('fs');
