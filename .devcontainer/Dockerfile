@@ -8,7 +8,7 @@ FROM mcr.microsoft.com/vscode/devcontainers/javascript-node:0-${VARIANT}
 RUN apt-get update && export DEBIAN_FRONTEND=noninteractive \
     && apt-get -y install --no-install-recommends \
         bash-completion=1:2.11-2 \
-        silversearcher-ag=2.2.0+git20200805-1+b1 \
+        silversearcher-ag \
     && rm -rf /var/lib/apt/lists/*
 
 # [Optional] Uncomment if you want to install an additional version of node using nvm
