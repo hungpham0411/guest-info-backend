@@ -7,9 +7,6 @@ GET http://localhost:10350/guests
 GET http://localhost:10350/guests/1234567
 
 ###
-GET http://localhost:10350/guests?resident=true
-
-###
 DELETE http://localhost:10350/guests/1234567
 
 ###

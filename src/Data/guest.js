@@ -60,23 +60,6 @@ class Guests {
     }
   }
 
-  static async getByResident(residentVal) {
-    try {
-      const guestsCollection = await getGuestsCollection();
-      // { projection: { _id: 0 } } does not return _id field
-      let guest_cursor = await guestsCollection.find({ resident: residentVal }, { projection: { _id: 0 } });
-      let guests = await guest_cursor.toArray();
-      return guests;
-    } catch (e) {
-      logger.error("GuestsAccessObject.getByResident", e);
-      throw {
-        code: 500,
-        error: "Internal Server Error",
-        caused_by: e,
-      };
-    }    
-  }
-
   static async create(guestData) {
     const guestsCollection = await getGuestsCollection();
     const result = await guestsCollection.insertOne(guestData);
