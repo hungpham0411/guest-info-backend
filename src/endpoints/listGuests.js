@@ -7,13 +7,8 @@ const listGuests = {
   path: '/guests',
   async handler(request, response) {
     try {
-      const resident = request.query.resident;
       let guests;
-      if (resident === undefined) {
         guests = await Guests.getAll();
-      } else {
-        guests = await Guests.getByResident(resident);
-      }
       response.status(200).json(guests);
     } catch (e) {
       logger.error("Endpoints.listGuests", e);
