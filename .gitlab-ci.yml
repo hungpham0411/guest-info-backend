@@ -3,6 +3,7 @@ include:
 
 variables:
   DISABLE_JOBS: ""
+  PIPELINE_IMAGE_PLATFORMS: "linux/amd64,linux/arm64"
 
   # The local name of the Docker image built by the build command and
   # tested by the test command. Ignored, if build doesn't produce an image.

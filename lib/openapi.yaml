@@ -3,7 +3,7 @@
 # Instead edit the specification in specification/ of the API project."
 openapi: 3.0.3
 servers:
-  - url: 'http://localhost/guests'
+  - url: 'http://localhost'
 info:
   title: GuestInfoSystemAPI
   description: Guest information for Thea's Pantry
@@ -217,13 +217,6 @@ components:
                 type: string
               errorCode:
                 type: string
-    MongoId:
-      description: Unique identifier consisting of a 24 digit hexadecimal values (a MongoDB stringified ObjectID)
-      example: 0123456789aBcDeF01234567
-      maxLength: 24
-      minLength: 24
-      pattern: '^[0-9a-fA-F]{24}$'
-      type: string
     Guest:
       example:
         wsuID: '1234567'
@@ -344,4 +337,3 @@ components:
       description: Current operating version of the API
       pattern: '^(0|[1-9]\d*)\.(0|[1-9]\d*)\.(0|[1-9]\d*)(?:-((?:0|[1-9]\d*|\d*[a-zA-Z-][0-9a-zA-Z-]*)(?:\.(?:0|[1-9]\d*|\d*[a-zA-Z-][0-9a-zA-Z-]*))*))?(?:\+([0-9a-zA-Z-]+(?:\.[0-9a-zA-Z-]+)*))?$'
       type: string
-
