@@ -4,33 +4,21 @@ GET http://localhost:10350/version
 GET http://localhost:10350/guests
 
 ###
-GET http://localhost:10350/guests/1234567
+GET http://localhost:10350/guests/123-23
 
 ###
-DELETE http://localhost:10350/guests/1234567
+DELETE http://localhost:10350/guests/123-23
 
 ###
 POST http://localhost:10350/guests HTTP/1.1
 content-type: application/json
 
 {
-  "wsuID": "1234567",
-  "resident": true,
-  "zipCode": "01602",
-  "unemployment": false,
-  "assistance": {
-    "socSec": false,
-    "TANF": false,
-    "finAid": false,
-    "other": false,
-    "SNAP": false,
-    "WIC": false,
-    "breakfast": false,
-    "lunch": false,
-    "SFSP": false
-  },
-  "guestAge": 42, 
-  "numberInHousehold": 4
+  "wneID": "123-23",
+  "residency": "commuter",
+  "grad_year": 2023,
+  "grad": "UG",
+  "date": "04-12-2023"
 }
 
 ###
@@ -38,45 +26,21 @@ POST http://localhost:10350/guests HTTP/1.1
 content-type: application/json
 
 {
-  "wsuID": "1234568",
-  "resident": false,
-  "zipCode": "01603",
-  "unemployment": false,
-  "assistance": {
-    "socSec": false,
-    "TANF": false,
-    "finAid": false,
-    "other": false,
-    "SNAP": false,
-    "WIC": false,
-    "breakfast": false,
-    "lunch": false,
-    "SFSP": false
-  },
-  "guestAge": 42, 
-  "numberInHousehold": 4
+  "wneID": "246-23",
+  "residency": "resident",
+  "grad_year": 2024,
+  "grad": "UG",
+  "date": "04-15-2023"
 }
 
 ###
-PUT http://localhost:10350/guests/1234561 HTTP/1.1
+PUT http://localhost:10350/guests/246-23 HTTP/1.1
 content-type: application/json
 
 {
-  "wsuID": "1234561",
-  "resident": true,
-  "zipCode": "01602",
-  "unemployment": false,
-  "assistance": {
-    "socSec": false,
-    "TANF": false,
-    "finAid": false,
-    "other": false,
-    "SNAP": false,
-    "WIC": false,
-    "breakfast": false,
-    "lunch": false,
-    "SFSP": false
-  },
-  "guestAge": 42, 
-  "numberInHousehold": 5
+  "wneID": "246-23",
+  "residency": "resident",
+  "grad_year": 2024,
+  "grad": "G",
+  "date": "04-15-2023"
 }

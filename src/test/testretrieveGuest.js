@@ -5,10 +5,10 @@ const Guests = require("../Data/guest");
 
 chai.use(chaiHttp)
 
-describe('test GET /guests/WSUID', () => {
+describe('test GET /guests/WNEID', () => {
     it("200 OK", (done) => {
         chai.request('http://localhost:10350')
-            .get('/guests/1234567')
+            .get('/guests/123-23')
             .end((error, response) => {
                 if(error){
                     console.log(error)
@@ -23,7 +23,7 @@ describe('test GET /guests/WSUID', () => {
 
     it("404 not found", (done) => {
         chai.request('http://localhost:10350')
-            .get('/guests/1234568')
+            .get('/guests/123-23')
             .end((error, response) => {
                 if(error){
                     console.log(error)

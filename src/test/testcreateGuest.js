@@ -6,23 +6,11 @@ chai.use(chaiHttp);
 
 // a set of valid guest data
 const validGuestData = {
-    "wsuID": "1234561",
-    "resident": true,
-    "zipCode": "01602",
-    "unemployment": false,
-    "assistance": {
-        "socSec": false,
-        "TANF": false,
-        "finAid": false,
-        "other": false,
-        "SNAP": false,
-        "WIC": false,
-        "breakfast": false,
-        "lunch": false,
-        "SFSP": false
-    },
-    "guestAge": 42,
-    "numberInHousehold": 4
+    "wneID": "246-23",
+    "residency": "resident",
+    "grad_year": 2024,
+    "grad": "UG",
+    "date": "04-15-2023"
 };
 // The actual guest to test using valid or invalid property values.
 // Important: copy by values using spread operator. If you copy by ref to validGuestData and then mutate guestData,
@@ -41,12 +29,13 @@ describe('Create Guest Endpoint', () => {
             }
 
             res.should.have.status(201);
-            res.should.have.header('Location', '/guests/1234561');
+            res.should.have.header('Location', '/guests/246-23');
             res.body.should.be.an('object');
-            res.body.should.have.property('wsuID').equal('1234561');
-            res.body.should.have.property('zipCode').equal('01602');
-            res.body.should.have.property('guestAge').equal(42);
-            res.body.should.have.property('numberInHousehold').equal(4);
+            res.body.should.have.property('wneID').equal('246-23');
+            res.body.should.have.property('residency').equal('resident');
+            res.body.should.have.property('grad_year').equal(2024);
+            res.body.should.have.property('grad').equal("UG");
+            res.body.should.have.property('date').equal("04-15-2023");
             done();
         });
     });
@@ -73,7 +62,7 @@ describe('Create Guest Endpoint', () => {
     // Remove the guest so you can repeatedly call `npm run test` without running `commands/rebuild.sh` to remove the conflicting guest.
     // Delete this one it() when migrating unit tests into CI pipeline.
     it('...remove the guest', (done) => {
-        const guestID = guestData.wsuID;
+        const guestID = guestData.wneID;
         chai.request('http://localhost:10350')
         .delete(`/guests/${guestID}`)
         .end((err, res) => {
@@ -83,7 +72,7 @@ describe('Create Guest Endpoint', () => {
 
     it('returns 400 error response if guest data is invalid', (done) => {
         guestData = {...validGuestData};
-        guestData.wsuID = '123456X'; // does not conform to wsuID pattern
+        guestData.wneID = '123456X'; // does not conform to wneID pattern
         chai.request('http://localhost:10350')
         .post('/guests')
         .send(guestData)

@@ -14,7 +14,7 @@ class Guests {
     try {
       const guestsCollection = await getGuestsCollection();
       // { projection: { _id: 0 } } does not return _id field
-      let guest = await guestsCollection.findOne({ wsuID: id }, { projection: { _id: 0 } });
+      let guest = await guestsCollection.findOne({ wneID: id }, { projection: { _id: 0 } });
       console.log(guest !== null);
       return guest !== null;
     } catch (e) {
@@ -48,7 +48,7 @@ class Guests {
     try {
       const guestsCollection = await getGuestsCollection();
       // { projection: { _id: 0 } } does not return _id field
-      let guest = await guestsCollection.findOne({ wsuID: id }, { projection: { _id: 0 } });
+      let guest = await guestsCollection.findOne({ wneID: id }, { projection: { _id: 0 } });
       return guest;
     } catch (e) {
       logger.error("GuestsAccessObject.getOne", e);
@@ -61,6 +61,7 @@ class Guests {
   }
 
   static async create(guestData) {
+    console.log(guestData)
     const guestsCollection = await getGuestsCollection();
     const result = await guestsCollection.insertOne(guestData);
     // { projection: { _id: 0 } } does not return _id field
@@ -73,16 +74,14 @@ class Guests {
       const guestsCollections = await getGuestsCollection();
       await guestsCollections.updateOne(
         //query
-        { wsuID: id },
+        { wneID: id },
         //request body
         {
           $set: {
-            resident: guestData.resident,
-            zipCode: guestData.zipCode,
-            unemployment: guestData.unemployment,
-            assistance: guestData.assistance,
-            guestAge: guestData.guestAge,
-            numberInHousehold: guestData.numberInHousehold,
+            residency: guestData.residency,
+            grad_year: guestData.grad_year,
+            grad: guestData.grad,
+            date: guestData.date
           },
         }
       );
@@ -100,7 +99,7 @@ class Guests {
   static async deleteOne(id) {
     const guestsCollection = await getGuestsCollection();
     const result = await guestsCollection.deleteOne(
-      { wsuID: id }
+      { wneID: id }
     );
     return result.deletedCount >= 1;
   }

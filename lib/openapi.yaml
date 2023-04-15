@@ -6,10 +6,10 @@ servers:
   - url: 'http://localhost'
 info:
   title: GuestInfoSystemAPI
-  description: Guest information for Thea's Pantry
+  description: Guest information for Bear Necessities
   version: 0.0.0
   contact:
-    name: Thea's Pantry
+    name: Bear Necessities
     email: info@librefoodpantry.org
     url: librefoodpantry.org
 paths:
@@ -64,15 +64,15 @@ paths:
           $ref: '#/components/responses/Conflict'
         '500':
           $ref: '#/components/responses/ServerError'
-  '/guests/{wsuID}':
+  '/guests/{wneID}':
     description: Guest with given id.
     parameters:
-      - name: wsuID
+      - name: wneID
         in: path
         required: true
-        description: Worcester State University ID of the guest whose info is desired.
+        description: Western New England University ID of the guest whose info is desired.
         schema:
-          $ref: '#/components/schemas/WSUID'
+          $ref: '#/components/schemas/WNEID'
     get:
       description: Gets guest's data.
       operationId: retrieveGuest
@@ -195,13 +195,10 @@ components:
       description: Not Acceptable
       type: object
       example:
-        message: '.response should have required property ''wsuID'', .response should have required property ''zipCode'''
+        message: '.response should have required property ''wneID'''
         errors:
-          - path: .response.wsuID
-            message: should have required property 'wsuID'
-            errorCode: required.openapi.validation
-          - path: .response.zipCode
-            message: should have required property 'zipCode'
+          - path: .response.wneID
+            message: should have required property 'wneID'
             errorCode: required.openapi.validation
       properties:
         message:
@@ -219,119 +216,55 @@ components:
                 type: string
     Guest:
       example:
-        wsuID: '1234567'
-        resident: true
-        zipCode: 02048
-        unemployment: false
-        assistance:
-          socSec: false
-          TANF: false
-          finAid: false
-          other: false
-          SNAP: false
-          WIC: false
-          breakfast: false
-          lunch: false
-          SFSP: false
-        guestAge: 42
-        numberInHousehold: 4
+        wneID: '123-23'
+        residency: 'commuter'
+        grad_year: 2023
+        grad: "UG"
+        date: "04-12-2023"
       description: Guest object
       type: object
       properties:
-        wsuID:
-          $ref: '#/components/schemas/WSUID'
-        resident:
-          $ref: '#/components/schemas/Resident'
-        zipCode:
-          $ref: '#/components/schemas/ZipCode'
-        unemployment:
-          $ref: '#/components/schemas/Unemployment'
-        assistance:
-          $ref: '#/components/schemas/Assistance'
-        guestAge:
-          $ref: '#/components/schemas/GuestAge'
-        numberInHousehold:
-          $ref: '#/components/schemas/NumberInHousehold'
+        wneID:
+          $ref: '#/components/schemas/WNEID'
+        residency:
+          $ref: '#/components/schemas/Residency'
+        grad_year:
+          $ref: '#/components/schemas/Grad_Year'
+        grad:
+          $ref: '#/components/schemas/Grad'
+        date:
+          $ref: '#/components/schemas/Date'
       required:
-        - wsuID
-        - resident
-        - zipCode
-        - unemployment
-        - assistance
-        - guestAge
-        - numberInHousehold
-    GuestAge:
-      example: 43
-      description: Age of guest in years
-      type: number
-    NumberInHousehold:
-      example: 4
-      description: Number of people living in the guest's household
-      type: number
+        - wneID
+        - residency
+        - grad_year
+        - grad
+        - date
     GuestArray:
       type: array
       items:
         $ref: '#/components/schemas/Guest'
-    WSUID:
-      example: '1211141'
-      description: Unique Worcester State University identifier
-      pattern: '^[0-9]{7}$'
+    WNEID:
+      example: '123-23'
+      description: Unique Western New England University identifier
+      pattern: '^[0-9]{3}+-+[0-9]{2}$'
       type: string
-    Resident:
+    Residency:
       example: true
-      description: whether the guest lives on campus or not
-      type: boolean
-    ZipCode:
-      example: 02048
-      description: guest zip code (01602 if resident)
-      pattern: '^[0-9]{5}(?:-[0-9]{4})?$'
+      description: whether the guest is a commuter or resident
       type: string
-    Unemployment:
-      example: false
-      description: if the guest receives unemployment benefits
-      type: boolean
-    Assistance:
-      example:
-        socSec: false
-        TANF: false
-        finAid: false
-        other: false
-        SNAP: false
-        WIC: false
-        breakfast: false
-        lunch: false
-        SFSP: false
-      description: the kind of aid that the guest receives
-      type: object
-      properties:
-        socSec:
-          type: boolean
-        TANF:
-          type: boolean
-        finAid:
-          type: boolean
-        other:
-          type: boolean
-        SNAP:
-          type: boolean
-        WIC:
-          type: boolean
-        breakfast:
-          type: boolean
-        lunch:
-          type: boolean
-        SFSP:
-          type: boolean
-      required:
-        - socSec
-        - TANF
-        - finAid
-        - other
-        - SNAP
-        - WIC
-        - breakfast
-        - lunch
-        - SFSP
+    Grad_Year:
+      example: 2023
+      description: graduation date of the guest
+      type: number
+    Grad:
+      example: "UG"
+      description: whether the guest is a grad or undergrad
+      type: string
+    Date:
+      example: "04-12-2023"
+      description: date of guest's registration
+      type: string
     APIVersion:
       example: 1.2.3
       description: Current operating version of the API

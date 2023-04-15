@@ -26,7 +26,7 @@ const replaceGuest = {
         response.status(404).json({
           status: 404,
           error: "Guest not found",
-          message: "wsuID does not exist"
+          message: "wneID does not exist"
         });
       }
     } catch (e) {
