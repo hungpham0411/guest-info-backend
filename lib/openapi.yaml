@@ -250,7 +250,7 @@ components:
       pattern: '^[0-9]{3}+-+[0-9]{2}$'
       type: string
     Residency:
-      example: true
+      example: 'resident'
       description: whether the guest is a commuter or resident
       type: string
     Grad_Year:
