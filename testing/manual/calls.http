@@ -42,5 +42,5 @@ content-type: application/json
   "residency": "resident",
   "grad_year": 2024,
   "grad": "G",
-  "date": "04-15-2023"
+  "date": "04-15-2023",
 }

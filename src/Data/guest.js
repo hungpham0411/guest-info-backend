@@ -61,9 +61,9 @@ class Guests {
   }
 
   static async create(guestData) {
-    console.log(guestData)
     const guestsCollection = await getGuestsCollection();
     const result = await guestsCollection.insertOne(guestData);
+    console.log(result);
     // { projection: { _id: 0 } } does not return _id field
     let guest = await guestsCollection.findOne({ _id: result.insertedId }, { projection: { _id: 0 } });
     return guest;

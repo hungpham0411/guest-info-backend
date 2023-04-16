@@ -72,7 +72,7 @@ describe('Create Guest Endpoint', () => {
 
     it('returns 400 error response if guest data is invalid', (done) => {
         guestData = {...validGuestData};
-        guestData.wneID = '123456X'; // does not conform to wneID pattern
+        guestData.wneID = '246-2X'; // does not conform to wneID pattern
         chai.request('http://localhost:10350')
         .post('/guests')
         .send(guestData)
