@@ -81,7 +81,7 @@ class Guests {
             residency: guestData.residency,
             grad_year: guestData.grad_year,
             grad: guestData.grad,
-            date: guestData.date
+            date: guestData.date,
           },
         }
       );
