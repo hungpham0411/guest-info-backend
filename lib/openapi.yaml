@@ -210,7 +210,7 @@ paths:
         required: true
         description: Western New England University ID of the guest whose info is desired.
         schema:
-          $ref: '#/components/schemas/Date'
+          $ref: '#/components/schemas/Date+Date'
     get:
       description: All visits in a given range
       operationId: retrieveVisits
@@ -359,6 +359,10 @@ components:
     Date:
       example: "04-12-2023"
       description: date of guest's registration
+      type: string
+    Date+Date:
+      example: "04-12-2023+05-25-2023"
+      description: date range for report generating
       type: string
     APIVersion:
       example: 1.2.3
