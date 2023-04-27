@@ -1,5 +1,5 @@
 /**
- * guest.js is responsible for manipulating the guests collection in the
+ * visit.js is responsible for manipulating the visits collection in the
  * Mongo database. In architecture parlance, it is a Data Access Object.
  * It abstracts away the details of interact with the database.
  */

@@ -18,7 +18,10 @@ const retrieveVisits = {
                 visits_in_range.push(visit);
             } 
         }
-        response.status(200).json(visits_in_range);
+        response.status(200).json({
+            total_visits: visits_in_range.length,
+            visits: visits_in_range
+        });
     } catch (e) {
         logger.error("Endpoints.retrieveVisits", e);
         response.status(500).json({
