@@ -202,6 +202,32 @@ paths:
           $ref: '#/components/responses/Conflict'
         '500':
           $ref: '#/components/responses/ServerError'
+  '/visits/{date}':
+    description: Get all guest visits during a certain range of dates
+    parameters:
+      - name: date
+        in: path
+        required: true
+        description: Western New England University ID of the guest whose info is desired.
+        schema:
+          $ref: '#/components/schemas/Date'
+    get:
+      description: All visits in a given range
+      operationId: retrieveVisits
+      x-eov-operation-handler: endpoints
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:  
+                $ref: '#/components/schemas/VisitArray'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/ServerError'
   /version:
     description: Get current API version number
     get:
