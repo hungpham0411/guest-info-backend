@@ -151,6 +151,57 @@ paths:
           $ref: '#/components/responses/NotFound'
         '500':
           $ref: '#/components/responses/ServerError'
+  /visits:
+    description: Record of visits for Guests using the Bear Necessities Market
+    get:
+      description: All visits
+      operationId: listVisits
+      x-eov-operation-handler: endpoints
+      responses:
+        '200':
+          description: OK
+          content: 
+            application/json:
+              schema:
+                $ref: '#/components/schemas/VisitArray'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '500':
+          $ref: '#/components/responses/ServerError'
+    post: 
+      description: Add a new guest's visit
+      operationId: createVisit
+      x-eov-operation-handler: endpoints
+      requestBody:
+        description: Visit data
+        required: true
+        content: 
+          application/json:
+            schema: 
+              $ref: '#/components/schemas/Visit'
+      responses:
+        '201':
+          description: Created
+          content: 
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Visit'
+          headers:
+            Location:
+              description: URI of new item.
+              explode: false
+              required: true
+              schema:
+                minLength: 1
+                nullable: false
+                type: string
+              style: simple 
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '409':
+          $ref: '#/components/responses/Conflict'
+        '500':
+          $ref: '#/components/responses/ServerError'
   /version:
     description: Get current API version number
     get:
@@ -244,6 +295,24 @@ components:
       type: array
       items:
         $ref: '#/components/schemas/Guest'
+    Visit:
+      example:
+        wneID: '123-23'
+        date: '04-25-2023'
+      description: Visit object
+      type: object
+      properties:
+        wneID:
+          $ref: '#/components/schemas/WNEID'
+        date:
+          $ref: '#/components/schemas/Date'
+      required:
+        - wneID
+        - date
+    VisitArray:
+      type: array
+      items:
+        $ref: '#/components/schemas/Visit'
     WNEID:
       example: '123-23'
       description: Unique Western New England University identifier
