@@ -202,15 +202,15 @@ paths:
           $ref: '#/components/responses/Conflict'
         '500':
           $ref: '#/components/responses/ServerError'
-  '/visits/{date}':
+  '/visits/{date_range}':
     description: Get all guest visits during a certain range of dates
     parameters:
-      - name: date
+      - name: date_range
         in: path
         required: true
-        description: Western New England University ID of the guest whose info is desired.
+        description: the date range for report generating ( start_date + end_date )
         schema:
-          $ref: '#/components/schemas/Date+Date'
+          $ref: '#/components/schemas/DateRange'
     get:
       description: All visits in a given range
       operationId: retrieveVisits
@@ -360,9 +360,9 @@ components:
       example: "04-12-2023"
       description: date of guest's registration
       type: string
-    Date+Date:
+    DateRange:
       example: "04-12-2023+05-25-2023"
-      description: date range for report generating
+      description: date range for generating reports of guest visits in that time range
       type: string
     APIVersion:
       example: 1.2.3

@@ -49,7 +49,7 @@ content-type: application/json
 GET http://localhost:10350/visits
 
 ###
-GET http://localhost:10350/visits/04-12-2023+04-26-2023
+GET http://localhost:10350/visits/04-15-2023+04-26-2023
 
 ###
 POST http://localhost:10350/visits HTTP/1.1
