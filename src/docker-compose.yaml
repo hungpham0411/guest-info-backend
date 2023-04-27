@@ -3,6 +3,7 @@ services:
 
   backend:
     image: guestinfobackend
+    build: .
     ports:
       - 10350:10350
     environment:
