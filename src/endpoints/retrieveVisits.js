@@ -15,12 +15,15 @@ const retrieveVisits = {
         for (const visit of visits) {
             if (new Date(visit.date).getTime() >= new Date(start_date).getTime() && 
                 new Date(visit.date).getTime() <= new Date(end_date).getTime()) {
-                visits_in_range.push(visit);
+                visits_in_range.push(visit)
             } 
         }
+        let total = {};
+        total["Total Visits"] = visits_in_range.length;
+        visits_in_range.push(total);
+
         response.status(200).json({
-            total_visits: visits_in_range.length,
-            visits: visits_in_range
+            visits: visits_in_range,
         });
     } catch (e) {
         logger.error("Endpoints.retrieveVisits", e);
