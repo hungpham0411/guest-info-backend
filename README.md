@@ -52,4 +52,4 @@ Development Infrastructure
 
 ## License
 
-[Link to code license](LICENSE)
+[Link to code license](https://gitlab.com/LibreFoodPantry/client-solutions/bear-necessities-market/guestinfosystem/guestinfobackend/-/blob/main/LICENSE)
