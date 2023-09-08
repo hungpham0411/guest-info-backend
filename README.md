@@ -1,9 +1,7 @@
-# Guest Info System Backend Server
+# Guest Info System Backend Server Overview
 
 The GuestInfoBackend provides a REST API server that implements an OpenAPI specification and is called by the GuestInfoFrontend. The developers
 of GuestInfoFrontend are the clients of GuestInfoBackend.
-
-## Overview
 
 ## Status
 
