@@ -7,9 +7,6 @@ of GuestInfoFrontend are the clients of GuestInfoBackend.
 
 The system backend is currently in active development. The database is active and currently deployed.
 
-## License
-
-[Link to code license](https://gitlab.com/LibreFoodPantry/client-solutions/bear-necessities-market/guestinfosystem/guestinfobackend/-/blob/main/LICENSE)
 
 ## Client Guide
 
@@ -49,3 +46,7 @@ Development Infrastructure
 * [Development Environment](docs/developer/development-environment.md)
 * [Documentation System](docs/developer/documentation-system.md)
 * [Version Control System](docs/developer/version-control-system.md)
+
+## License
+
+[Link to code license](https://gitlab.com/LibreFoodPantry/client-solutions/bear-necessities-market/guestinfosystem/guestinfobackend/-/blob/main/LICENSE)
