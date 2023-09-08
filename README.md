@@ -3,6 +3,18 @@
 The GuestInfoBackend provides a REST API server that implements an OpenAPI specification and is called by the GuestInfoFrontend. The developers
 of GuestInfoFrontend are the clients of GuestInfoBackend.
 
+## Overview
+
+## Status
+
+## Installation Instructions
+
+## Usage Instructions
+
+## Tools
+
+## License
+
 ## Client Guide
 
 The API implemented by this server is in [lib/openapi.yaml](lib/openapi.yaml). The API can be viewed:
