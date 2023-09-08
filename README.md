@@ -5,6 +5,8 @@ of GuestInfoFrontend are the clients of GuestInfoBackend.
 
 ## Status
 
+The system backend is currently in active development. The database is active and currently deployed.
+
 ## Installation Instructions
 
 ## Usage Instructions
