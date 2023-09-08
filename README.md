@@ -7,15 +7,9 @@ of GuestInfoFrontend are the clients of GuestInfoBackend.
 
 The system backend is currently in active development. The database is active and currently deployed.
 
-## Installation Instructions
-
-TBD
-
-## Usage Instructions
-
-## Tools
-
 ## License
+
+
 
 ## Client Guide
 
@@ -55,3 +49,7 @@ Development Infrastructure
 * [Development Environment](docs/developer/development-environment.md)
 * [Documentation System](docs/developer/documentation-system.md)
 * [Version Control System](docs/developer/version-control-system.md)
+
+## License
+
+[Link to code license](LICENSE)
