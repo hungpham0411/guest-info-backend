@@ -49,7 +49,9 @@ The [source for the GuestInfoAPI](https://gitlab.com/LibreFoodPantry/client-solu
 * [Development Environment](docs/developer/development-environment.md)
 * [Documentation System](docs/developer/documentation-system.md)
 * [Version Control System](docs/developer/version-control-system.md)
+* Visual Studio Code
+* Docker Desktop
 
 ## License
 
-[Link to code license](https://gitlab.com/LibreFoodPantry/client-solutions/bear-necessities-market/guestinfosystem/guestinfobackend/-/blob/main/LICENSE)
+[GPL v3](https://gitlab.com/LibreFoodPantry/client-solutions/bear-necessities-market/guestinfosystem/guestinfobackend/-/blob/main/LICENSE)
