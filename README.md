@@ -7,8 +7,10 @@ of GuestInfoFrontend are the clients of GuestInfoBackend.
 
 The system backend is currently in active development. The database is active and currently deployed.
 
+## Installation Instructions
+TBD
 
-## Client Guide
+## Usage Instructions
 
 The API implemented by this server is in [lib/openapi.yaml](lib/openapi.yaml). The API can be viewed:
 
@@ -17,9 +19,10 @@ The API implemented by this server is in [lib/openapi.yaml](lib/openapi.yaml). T
 
 The [source for the GuestInfoAPI](https://gitlab.com/LibreFoodPantry/client-solutions/theas-pantry/guestinfosystem/guestinfoapi) is where development of the API takes place.
 
-## Developer Guide
 
-Getting Started
+## Tools
+
+**Developer Guide**
 
 1. Read [LibreFoodPantry.org](https://librefoodpantry.org/)
     and join its Discord server.
@@ -37,7 +40,7 @@ Getting Started
 7. See [the developer cheat-sheet](docs/developer/cheat-sheet.md) for common
   commands you'll likely use.
 
-Development Infrastructure
+**Development Infrastructure**
 
 * [Automated Testing](docs/developer/automated-testing.md)
 * [Build System](docs/developer/build-system.md)
