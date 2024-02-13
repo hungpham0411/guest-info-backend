@@ -12,7 +12,7 @@ class Visits {
     static async existsInDB(id) {
         try {
             const visitsCollection = await getVisitsCollection();          // { projection: { _id: 0 } } does not return _id field
-            let visit = await visitsCollection.findOne({ wneID: id }, { projection: { _id: 0 } });
+            let visit = await visitsCollection.findOne({ bnmID: id }, { projection: { _id: 0 } });
             console.log(visit !== null);
             return visit !== null;
         } catch (e) {

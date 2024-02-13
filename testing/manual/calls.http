@@ -4,17 +4,17 @@ GET http://localhost:10350/version
 GET http://localhost:10350/guests
 
 ###
-GET http://localhost:10350/guests/123-23
+GET http://localhost:10350/guests/AW0123456
 
 ###
-DELETE http://localhost:10350/guests/123-23
+DELETE http://localhost:10350/guests/AW0123456
 
 ###
 POST http://localhost:10350/guests HTTP/1.1
 content-type: application/json
 
 {
-  "wneID": "123-23",
+  "bnmID": "AW0123456",
   "residency": "commuter",
   "grad_year": 2023,
   "grad": "UG",
@@ -26,7 +26,7 @@ POST http://localhost:10350/guests HTTP/1.1
 content-type: application/json
 
 {
-  "wneID": "246-23",
+  "bnmID": "AW7890123",
   "residency": "resident",
   "grad_year": 2024,
   "grad": "UG",
@@ -34,11 +34,11 @@ content-type: application/json
 }
 
 ###
-PUT http://localhost:10350/guests/246-23 HTTP/1.1
+PUT http://localhost:10350/guests/AW7890123 HTTP/1.1
 content-type: application/json
 
 {
-  "wneID": "246-23",
+  "bnmID": "AW7890123",
   "residency": "resident",
   "grad_year": 2024,
   "grad": "G",
@@ -56,7 +56,7 @@ POST http://localhost:10350/visits HTTP/1.1
 content-type: application/json
 
 {
-  "wneID": "123-23",
+  "bnmID": "AW0123456",
   "date": "04-14-2023"
 }
 
@@ -65,6 +65,6 @@ POST http://localhost:10350/visits HTTP/1.1
 content-type: application/json
 
 {
-  "wneID": "246-23",
+  "bnmID": "AW7890123",
   "date": "04-26-2023"
 }

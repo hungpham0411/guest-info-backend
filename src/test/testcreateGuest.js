@@ -6,7 +6,7 @@ chai.use(chaiHttp);
 
 // a set of valid guest data
 const validGuestData = {
-    "wneID": "246-23",
+    "bnmID": "AW7890123",
     "residency": "resident",
     "grad_year": 2024,
     "grad": "UG",
@@ -29,9 +29,9 @@ describe('Create Guest Endpoint', () => {
             }
 
             res.should.have.status(201);
-            res.should.have.header('Location', '/guests/246-23');
+            res.should.have.header('Location', '/guests/AW7890123');
             res.body.should.be.an('object');
-            res.body.should.have.property('wneID').equal('246-23');
+            res.body.should.have.property('bnmID').equal('AW7890123');
             res.body.should.have.property('residency').equal('resident');
             res.body.should.have.property('grad_year').equal(2024);
             res.body.should.have.property('grad').equal("UG");
@@ -62,7 +62,7 @@ describe('Create Guest Endpoint', () => {
     // Remove the guest so you can repeatedly call `npm run test` without running `commands/rebuild.sh` to remove the conflicting guest.
     // Delete this one it() when migrating unit tests into CI pipeline.
     it('...remove the guest', (done) => {
-        const guestID = guestData.wneID;
+        const guestID = guestData.bnmID;
         chai.request('http://localhost:10350')
         .delete(`/guests/${guestID}`)
         .end((err, res) => {
@@ -72,7 +72,7 @@ describe('Create Guest Endpoint', () => {
 
     it('returns 400 error response if guest data is invalid', (done) => {
         guestData = {...validGuestData};
-        guestData.wneID = '246-2X'; // does not conform to wneID pattern
+        guestData.bnmID = 'AW-789012'; // does not conform to bnmID pattern
         chai.request('http://localhost:10350')
         .post('/guests')
         .send(guestData)
