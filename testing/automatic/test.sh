@@ -1,5 +1,7 @@
 cd ../../src
-npm install chai --save-dev 
-npm install -g mocha
+npm install --save-dev chai 
+npm install --save-dev mocha
+npm audit 
+npm audit fix
 npm test
 
