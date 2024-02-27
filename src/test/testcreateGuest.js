@@ -1,8 +1,7 @@
 const chai = require('chai');
-const chaiHttp = require('chai-http');
 const should = require('chai').should();
 
-chai.use(chaiHttp);
+
 
 // a set of valid guest data
 const validGuestData = {

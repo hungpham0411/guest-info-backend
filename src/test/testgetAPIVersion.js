@@ -1,11 +1,11 @@
 process.env.NODE_ENV = 'test';
 const chai = require('chai');
 const should = require('chai').should();
-const chaiHttp = require('chai-http');
+
 const Guests = require("../Data/guest");
 const apiVersion = require('../lib/config').API_VERSION;
 
-chai.use(chaiHttp)
+
 
 describe('test GET /version', () => {
     it("200 OK", (done) => {

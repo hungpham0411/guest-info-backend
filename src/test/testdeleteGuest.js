@@ -1,9 +1,7 @@
 process.env.NODE_ENV = 'test';
 let chai = require('chai')
-let chaiHttp = require('chai-http');
 const Guests = require("../Data/guest");
 
-chai.use(chaiHttp)
 
 describe('test DELETE /guest/WNEID', () => {
     it("200 OK", (done) => {

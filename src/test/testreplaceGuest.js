@@ -1,10 +1,8 @@
 const chai = require('chai')
-const chaiHttp = require('chai-http')
+
 const expect = chai.expect
 const Guests = require('../Data/guest')
 const MessageBroker = require('../lib/messageBroker')
-
-chai.use(chaiHttp)
 
 describe('replaceGuest endpoint', () => {
     it('should update the guest and return 200 with the updated guest data', async () => {
