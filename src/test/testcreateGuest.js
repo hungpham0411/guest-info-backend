@@ -10,7 +10,8 @@ const validGuestData = {
     "residency": "resident",
     "grad_year": 2024,
     "grad": "UG",
-    "date": "04-15-2023"
+    "date": "04-15-2023",
+    "year_issued": 2022
 };
 // The actual guest to test using valid or invalid property values.
 // Important: copy by values using spread operator. If you copy by ref to validGuestData and then mutate guestData,
@@ -36,6 +37,7 @@ describe('Create Guest Endpoint', () => {
             res.body.should.have.property('grad_year').equal(2024);
             res.body.should.have.property('grad').equal("UG");
             res.body.should.have.property('date').equal("04-15-2023");
+            res.body.should.have.property('year_issued').equal(2022);
             done();
         });
     });

@@ -82,6 +82,7 @@ class Guests {
             grad_year: guestData.grad_year,
             grad: guestData.grad,
             date: guestData.date,
+            year_issued: guestData.year_issued,
           },
         }
       );

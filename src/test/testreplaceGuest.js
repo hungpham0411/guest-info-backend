@@ -14,6 +14,7 @@ describe('replaceGuest endpoint', () => {
             grad_year: 2024,
             grad: 'G',
             date: '04-15-2023',
+            year_issued: 2022,
         }
         const res = await chai
             .request('http://localhost:10350')
@@ -33,6 +34,7 @@ describe('replaceGuest endpoint', () => {
             grad_year: 2024,
             grad: 'G',
             date: '04-15-2023',
+            year_issued: 2022,
         }
         const res = await chai
             .request('http://localhost:10350')
