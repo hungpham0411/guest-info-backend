@@ -9,9 +9,9 @@ const createVisit = {
   async handler(request, response) {
     try {
       const visitData = request.body;
-      if ( await Guests.existsInDB(visitData.wneID) === true) {
+      if ( await Guests.existsInDB(visitData.BNMID) === true) {
         const visit = await Visits.create(visitData);
-        const resourceUri = `${request.originalUrl}/${visit.wneID}`;
+        const resourceUri = `${request.originalUrl}/${visit.BNMID}`;
         delete visit["_id"]; // do not return the mongoID
         response.status(201).location(resourceUri).json(visit);
       } else {

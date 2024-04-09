@@ -14,7 +14,7 @@ class Guests {
     try {
       const guestsCollection = await getGuestsCollection();
       // { projection: { _id: 0 } } does not return _id field
-      let guest = await guestsCollection.findOne({ wneID: id }, { projection: { _id: 0 } });
+      let guest = await guestsCollection.findOne({ BNMID: id }, { projection: { _id: 0 } });
       console.log(guest !== null);
       return guest !== null;
     } catch (e) {
@@ -48,7 +48,7 @@ class Guests {
     try {
       const guestsCollection = await getGuestsCollection();
       // { projection: { _id: 0 } } does not return _id field
-      let guest = await guestsCollection.findOne({ wneID: id }, { projection: { _id: 0 } });
+      let guest = await guestsCollection.findOne({ BNMID: id }, { projection: { _id: 0 } });
       return guest;
     } catch (e) {
       logger.error("GuestsAccessObject.getOne", e);
@@ -74,14 +74,15 @@ class Guests {
       const guestsCollections = await getGuestsCollection();
       await guestsCollections.updateOne(
         //query
-        { wneID: id },
+        { BNMID: id },
         //request body
         {
           $set: {
-            residency: guestData.residency,
-            grad_year: guestData.grad_year,
-            grad: guestData.grad,
-            date: guestData.date,
+            Resident: guestData.Resident,
+            Grad_Year: guestData.Grad_Year,
+            Grad: guestData.Grad,
+            Date: guestData.Date,
+            Year_Issued: guestData.Year_Issued,
           },
         }
       );
@@ -99,7 +100,7 @@ class Guests {
   static async deleteOne(id) {
     const guestsCollection = await getGuestsCollection();
     const result = await guestsCollection.deleteOne(
-      { wneID: id }
+      { BNMID: id }
     );
     return result.deletedCount >= 1;
   }
