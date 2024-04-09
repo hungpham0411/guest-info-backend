@@ -16,7 +16,7 @@ const deleteGuest = {
         response.status(404).json({
           status: 404,
           error: "Guest not found",
-          message: "wneID does not exist"
+          message: "BNMID does not exist"
         });
       }
     } catch (e) {
