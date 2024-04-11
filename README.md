@@ -7,15 +7,12 @@ of GuestInfoFrontend are the clients of GuestInfoBackend.
 
 The system backend is currently in active development. The database is active and currently deployed.
 
-## Installation Instructions
+## Cuild & Run
 
 Make sure docker is up and running. 
 
-1. cd guestinffobackend
-2. cd commands 
-3. sh build.sh
-4. cd ../src 
-5. docker compose up
+1. commands/build.sh
+2. commands/up.sh 
 
 ## Usage Instructions
 
