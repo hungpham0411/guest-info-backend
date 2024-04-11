@@ -1271,6 +1271,11 @@ chai-http@^4.4.0:
     qs "^6.11.2"
     superagent "^8.0.9"
 
+chai-null@^0.1.0:
+  version "0.1.0"
+  resolved "https://registry.npmjs.org/chai-null/-/chai-null-0.1.0.tgz"
+  integrity sha512-KGTtLdTrU2BOwmfAeZ09itkl8WIhHou544vKd5uNcgvJZBcP94DZIZPCjsFEgnzg9MqA8xcrJg8gFTPBHPiLKA==
+
 chai@^4.4.1:
   version "4.4.1"
   resolved "https://registry.npmjs.org/chai/-/chai-4.4.1.tgz"
