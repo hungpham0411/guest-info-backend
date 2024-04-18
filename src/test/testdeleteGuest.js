@@ -12,11 +12,10 @@ describe('test DELETE /guest/BNMID', () => {
             .end((error, response) => {
                 if(error){
                     console.log(error)
-                    done(error)
+                    return done(error)
                 } else {
-                    chai.assert.equal(response.status, 200, 'Response was not okay')
-                    console.log(response.body)
-                    done()
+                    chai.assert.equal(response.status, 200)
+                    done();
                 }
             })
     })

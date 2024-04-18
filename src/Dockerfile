@@ -2,17 +2,17 @@
 
 # NODE_IMAGE is passed when building the container. That way we don't hardcode
 # the image or its version that this container is based on.
-FROM node:14-alpine as build
+FROM node:16-alpine as build
 
 # /app will hold our application. Create it and make it our working directory.
 WORKDIR /app
 
 # Install dependencies.
-COPY ./src/package.json ./src/yarn.lock ./
+COPY ./src/package.json ./
 RUN yarn install
 
 ###
-FROM node:14-alpine
+FROM node:16-alpine
 WORKDIR /app
 # Best practice: Don't run as root. Instead run as node (created in node image)
 RUN chown -R node:node .
