@@ -1,21 +1,21 @@
 process.env.NODE_ENV = 'test';
 let chai = require('chai')
 
-const Guests = require("../Data/guest");
+const Visits = require("../Data/visit");
 
 chai.use(require("chai-http"));
 
-describe('test GET /guests/BNMID', () => {
+describe('test GET /visits/', () => {
     it("200 OK", (done) => {
-        chai.request('http://localhost:10350')
-            .get('/guests/AW0123456')
+        chai.request('http://localhost:')
+            .get('/visits/')
             .end((error, response) => {
                 if(error){
                     console.log(error)
                     done(error)
                 } else {
-                    chai.assert.equal(response.status, 200, 'Guest retrieved')
-                    console.log(response.body)
+                    chai.assert.equal(response.status, 200, 'Visits retrieved')
+                    console.log(response.BNMID)
                     done()
                 }
             })
@@ -23,7 +23,7 @@ describe('test GET /guests/BNMID', () => {
 
     it("404 not found", (done) => {
         chai.request('http://localhost:10350')
-            .get('/guests/AW0123455')
+            .get('/guests/AW7890199')
             .end((error, response) => {
                 if(error){
                     console.log(error)
@@ -35,4 +35,6 @@ describe('test GET /guests/BNMID', () => {
                 }
             })
     })
+
+    
 });

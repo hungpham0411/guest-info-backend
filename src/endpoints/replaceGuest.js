@@ -20,7 +20,7 @@ const replaceGuest = {
         MessageBroker.sendMessage('guest-info', guest);
         
         // http status
-        const resourceUri = `${request.originalUrl}/${id}`
+        const resourceUri = request.originalUrl
         response.status(200).location(resourceUri).json(guest);
       } else {
         response.status(404).json({

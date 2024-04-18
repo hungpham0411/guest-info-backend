@@ -11,7 +11,9 @@ const deleteGuest = {
       const guest = await Guests.getOne(id);
       const isDeleteSuccessful = await Guests.deleteOne(id);
       if (isDeleteSuccessful) {
-        response.status(200).json(guest);
+        response.status(200).json({
+          status: 200,
+        });
       } else {
         response.status(404).json({
           status: 404,

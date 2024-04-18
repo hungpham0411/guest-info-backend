@@ -1,40 +1,62 @@
 const chai = require('chai')
-const chaiHttp = require('chai-http')
+
 const expect = chai.expect
 const Guests = require('../Data/guest')
 const MessageBroker = require('../lib/messageBroker')
 
-chai.use(chaiHttp)
+chai.use(require("chai-http"));
+
+const validGuestData = {
+    "BNMID": "AW0123456",
+    "Resident": "resident",
+    "Grad_Year": 2024,
+    "Grad": "UG",
+    "Date": "04-15-2023",
+    "Year_Issued": 2022
+};
 
 describe('replaceGuest endpoint', () => {
+
+    it('creates a new guest for replace test', (done) => {
+        chai.request('http://localhost:10350')
+        .post('/guests')
+        .send(validGuestData)
+        .end((err, res) => {
+            chai.expect(err).to.be.null
+            if (err) {
+                return done(err);
+            }
+            done();
+        });
+    });
     it('should update the guest and return 200 with the updated guest data', async () => {
         const updatedGuestData = {
-            bnmID: 'AW7890123',
-            residency: 'resident',
-            grad_year: 2024,
-            grad: 'G',
-            date: '04-15-2023',
-            year_issued: 2022,
+            "BNMID": "AW0123456",
+            "Resident": "resident",
+            "Grad_Year": 2025,
+            "Grad": "G",
+            "Date": "04-15-2023",
+            "Year_Issued": 2022,
         }
-        const res = await chai
+        const res = await chai 
             .request('http://localhost:10350')
-            .put(`/guests/AW7890123`)
+            .put(`/guests/AW0123456`)
             .send(updatedGuestData)
 
         // Check that the response is correct
         expect(res.status).to.equal(200)
-        expect(res.body).to.deep.equal(updatedGuest)
-        expect(res.headers.location).to.equal(`/guests/AW7890123`)
+        expect(res.body).to.deep.equal(updatedGuestData)
+        expect(res.headers.location).to.equal(`/guests/AW0123456`)
     })
 
     it('should return 404 if the guest does not exist', async () => {
         const updatedGuestData = {
-            bnmID: 'AW7890123',
-            residency: 'resident',
-            grad_year: 2024,
-            grad: 'G',
-            date: '04-15-2023',
-            year_issued: 2022,
+            BNMID: 'AW7890123',
+            Resident: 'resident',
+            Grad_Year: 2024,
+            Grad: 'G',
+            Date: '04-15-2023',
+            Year_Issued: 2022,
         }
         const res = await chai
             .request('http://localhost:10350')
