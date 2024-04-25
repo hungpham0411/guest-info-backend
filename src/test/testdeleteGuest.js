@@ -1,12 +1,10 @@
 process.env.NODE_ENV = 'test';
 let chai = require('chai')
 let chaiHttp = require('chai-http');
-const Guests = require("../Data/guest");
+chai.use(chaiHttp);
 
-chai.use(chaiHttp)
-
-describe('test DELETE /guest/BNMID', () => {
-    it("200 OK", (done) => {
+describe('Test deleting guests using their ID', () => {
+    it("Guest found and deleted", (done) => {
         chai.request('http://localhost:10350')
             .delete('/guests/AW0123456')
             .end((error, response) => {
@@ -20,7 +18,7 @@ describe('test DELETE /guest/BNMID', () => {
             })
     })
 
-    it("404 not found", (done) => {
+    it("Guest not found", (done) => {
         chai.request('http://localhost:10350')
             .delete('/guests/AW0123456')
             .end((error, response) => {

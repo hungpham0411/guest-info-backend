@@ -1,9 +1,5 @@
 const chai = require('chai')
-
 const expect = chai.expect
-const Guests = require('../Data/guest')
-const MessageBroker = require('../lib/messageBroker')
-
 chai.use(require("chai-http"));
 
 const validGuestData = {
@@ -15,7 +11,7 @@ const validGuestData = {
     "Year_Issued": 2022
 };
 
-describe('replaceGuest endpoint', () => {
+describe('Test replacing guest data', () => {
 
     it('creates a new guest for replace test', (done) => {
         chai.request('http://localhost:10350')

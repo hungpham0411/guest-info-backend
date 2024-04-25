@@ -1,13 +1,11 @@
 process.env.NODE_ENV = 'test';
 const chai = require('chai');
 const should = require('chai').should();
-
-const Guests = require("../Data/guest");
 const apiVersion = require('../lib/config').API_VERSION;
 chai.use(require("chai-http"));
 
 
-describe('test GET /version', () => {
+describe('Test retrieving the API version', () => {
     it("200 OK", (done) => {
         chai.request('http://localhost:10350')
             .get('/version')
