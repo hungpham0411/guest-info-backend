@@ -1,10 +1,9 @@
 process.env.NODE_ENV = 'test';
 let chai = require('chai')
-
-const Visits = require("../Data/visit");
 chai.use(require("chai-http"));
-describe('test GET /visits', () => {
-    it("200 OK", (done) => {
+
+describe('testlistVisits /visits', () => {
+    it("Should return 200 and list all visits", (done) => {
         chai.request('http://localhost:10350')
             .get('/visits')
             .end((error, response) => {
@@ -12,8 +11,8 @@ describe('test GET /visits', () => {
                     console.log(error)
                     done(error)
                 } else {
-                    chai.assert.equal(response.status, 200, 'Response was not okay')
-                    console.log(response.body)
+                    chai.assert.equal(response.status, 200, 'List of visits was displayed')
+                    //console.log(response.body)
                     done()
                 }
             })

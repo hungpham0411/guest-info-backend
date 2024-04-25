@@ -1,11 +1,8 @@
 process.env.NODE_ENV = 'test';
 let chai = require('chai')
-
-const Guests = require("../Data/guest");
-
 chai.use(require("chai-http"));
 
-describe('test GET /guests/BNMID', () => {
+describe('Test retrieving guest by ID', () => {
     it("200 OK", (done) => {
         chai.request('http://localhost:10350')
             .get('/guests/AW0123456')
@@ -21,7 +18,7 @@ describe('test GET /guests/BNMID', () => {
             })
     })
 
-    it("404 not found", (done) => {
+    it("Test retrieving with guest with incorrect ID", (done) => {
         chai.request('http://localhost:10350')
             .get('/guests/AW0123455')
             .end((error, response) => {
@@ -29,7 +26,7 @@ describe('test GET /guests/BNMID', () => {
                     console.log(error)
                     done(error)
                 } else {
-                    chai.assert.equal(response.status, 404, 'Response was not okay')
+                    chai.assert.equal(response.status, 404, 'Guest was not found')
                     console.log(response.body)
                     done()
                 }
